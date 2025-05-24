@@ -1,0 +1,255 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #F1F1F1;
+    padding: 0 2.813rem 0 2.813rem;
+}
+
+
+/* HEADER */
+
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+nav img {
+    width: 14.625rem;
+    height: 5.375rem;
+}
+
+#timer-scoreboard {
+    font-size: 4.375rem;
+    color: red;
+    font-weight: bold;
+}
+
+#lct-year {
+    font-weight: semibold;
+    font-size: 2rem;
+}
+
+
+/* SCOREBOARD */
+
+table {
+    width: 100%;
+    border-spacing: 0;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+th {
+    font-size: 1.563rem;
+    font-weight: medium;
+    background-color: #333333;
+    color: white;
+}
+
+tbody tr td{
+    text-align: center;
+    font-size: 1.875rem;
+    font-weight: semibold;
+}
+
+th, td {
+    border: 1px solid #111;
+    height: 3.938rem;
+}
+
+table thead tr:first-child th:first-child {
+    border-top-left-radius: 1.563rem;
+}
+
+table thead tr:first-child th:last-child {
+    border-top-right-radius: 1.563rem;
+}
+
+table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 1.563rem;
+}
+
+table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 1.563rem;
+}
+
+
+
+/* BANDE PARTENAIRES */
+
+#red-partenaires {
+    background-color: #C1121F;
+    margin-top: 0.563rem;
+    height: 3.438rem;
+}
+
+#red-partenaires h3 {
+    color: white;
+    font-size: 1.875rem;
+    text-align: center;
+    padding: 0.625rem 0;
+}
+
+
+/* PARTIE INFÉRIEURE DU SCOREBOARD */
+
+#bottom-scoreboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.563rem;
+}
+
+
+/* CARTES JOUEURS */
+
+#player-cards {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+#player-card-one {
+    background-color: #AED6E2;
+    margin-right: 0.188rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#player-card-one-team {
+    transform: rotate(270deg);
+    align-self: center;
+}
+
+#card-team-img {
+    display: flex;
+    margin-left: 3rem;
+}
+
+#player-card-one img {
+    width: 11.938rem;
+    height: 14.5rem;
+}
+
+#player-card-one-team {
+    margin-left: -1rem;
+}
+
+#player-card-one-name, 
+#player-card-one-team,
+#player-card-one-pseudo {
+    font-size: 1.875rem;
+}
+
+#player-card-two {
+    background-color: #EDD7B1;
+    margin-right: 0.188rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#player-card-two-team {
+    transform: rotate(270deg);
+    align-self: center;
+}
+
+#card-team-img {
+    display: flex;
+    margin-left: 3rem;
+}
+
+#player-card-two img {
+    width: 11.938rem;
+    height: 14.5rem;
+}
+
+#player-card-two-team {
+    margin-left: -1rem;
+}
+
+#player-card-two-name, 
+#player-card-two-team,
+#player-card-two-pseudo {
+    font-size: 1.875rem;
+}
+
+#player-card-one, #player-card-two {
+    width: 17.875rem;
+    height: 20.938rem;
+    border-radius: 1.563rem;
+}
+
+
+/* LÉGENDE */
+
+#card-legend {
+    background-color: #FFFFFF;
+    width: 36.188rem;
+    height: 20.938rem;
+    border-radius: 1.563rem;
+}
+
+#card-legend h5 {
+    font-size: 1.875rem;
+    margin: 1.063rem 0 0 1.625rem;
+}
+
+#red-flag,
+#green-flag,
+#purple-flag {
+    font-size: 1.875rem;
+    margin: 2rem 0 0 1.625rem;
+}
+
+
+/* TOTAL DE FLAGS TROUVÉS */
+
+#total-flags {
+    background-color: #FFFFFF;
+    width: 12.5rem;
+    height: 20.938rem;
+    border-radius: 1.563rem;
+    font-size: 1.875rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#text-total-flag {
+    text-align: center;
+}
+
+
+
+/* TOTAL DE FLAGS TROUVÉS */
+
+#prison-scoreboard{
+    /* background-color: #333333; */
+    background-image: url("/ctf_anna/ctf-challenge/public/images/prison.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 22.688rem;
+    height: 20.938rem;
+    border-radius: 1.563rem;
+}
+
+#card-text-prison h4 {
+    font-size: 1.875rem;
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 1.063rem;
+}

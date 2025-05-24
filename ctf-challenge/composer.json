@@ -1,0 +1,15 @@
+{
+    "name": "anna/ctf-challenge",
+    "autoload": {
+        "psr-4": {
+            "Anna\\CtfChallenge\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Anna DE MATOS",
+            "email": "anna.de-matos@campus-centre.fr"
+        }
+    ],
+    "require": {}
+}
