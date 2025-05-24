@@ -7,13 +7,16 @@
 
 body {
     background-color: #F1F1F1;
-    padding: 0 2.813rem 0 2.813rem;
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    margin: 0 3.125rem 0 3.125rem;
 }
 
 
 /* HEADER */
 
 nav {
+    grid-column: 1 / 25;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -35,6 +38,20 @@ nav img {
     font-size: 2rem;
 }
 
+/* MAIN */
+
+#main-scoreboard {
+    grid-column: 1 / 25;
+}
+
+
+main {
+    grid-column: 1 / 25;
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+}
+
+
 
 /* SCOREBOARD */
 
@@ -43,6 +60,7 @@ table {
     border-spacing: 0;
     border-radius: 1rem;
     overflow: hidden;
+    grid-column: 1 / 24;
 }
 
 th {
@@ -87,6 +105,7 @@ table tbody tr:last-child td:last-child {
     background-color: #C1121F;
     margin-top: 0.563rem;
     height: 3.438rem;
+    grid-column: 1 / 24;
 }
 
 #red-partenaires h3 {
@@ -125,6 +144,12 @@ table tbody tr:last-child td:last-child {
     justify-content: space-evenly;
 }
 
+#player-card-one-img {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
 #player-card-one-team {
     transform: rotate(270deg);
     align-self: center;
@@ -133,15 +158,25 @@ table tbody tr:last-child td:last-child {
 #card-team-img {
     display: flex;
     margin-left: 3rem;
+    height: 100%;
+    width: 100%;
 }
 
-#player-card-one img {
+#player-pic {
     width: 11.938rem;
     height: 14.5rem;
+    position: relative;
+}
+
+#lct-pic {
+    width: 5.438rem;
+    height: 2rem;
+    position: absolute;
+    align-self: end;
 }
 
 #player-card-one-team {
-    margin-left: -1rem;
+    margin-left: -6rem;
 }
 
 #player-card-one-name, 
@@ -167,15 +202,17 @@ table tbody tr:last-child td:last-child {
 #card-team-img {
     display: flex;
     margin-left: 3rem;
+    height: auto;
 }
 
-#player-card-two img {
-    width: 11.938rem;
-    height: 14.5rem;
+#player-card-two-img {
+    width: 100%;
+    height: 100%;
+    display: flex;
 }
 
 #player-card-two-team {
-    margin-left: -1rem;
+    margin-left: -6rem;
 }
 
 #player-card-two-name, 
@@ -236,7 +273,6 @@ table tbody tr:last-child td:last-child {
 /* TOTAL DE FLAGS TROUVÉS */
 
 #prison-scoreboard{
-    /* background-color: #333333; */
     background-image: url("/ctf_anna/ctf-challenge/public/images/prison.jpg");
     background-position: center;
     background-repeat: no-repeat;
