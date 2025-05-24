@@ -12,4 +12,9 @@ class HomeController
     {
         require_once __DIR__ . '/../views/submitting.php';
     }
+
+    public function admin()
+    {
+        require_once __DIR__ . '/../views/loginAdmin.php';
+    }
 }
