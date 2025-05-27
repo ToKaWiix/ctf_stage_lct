@@ -1,7 +1,7 @@
-<?php include __DIR__ . '/includes/admin/headerAdmin.php'; ?>
+<?php include __DIR__ . '/includes/admin/login/headerAdmin.php'; ?>
 
 <main>
-<?php include __DIR__ . '/includes/admin/loginform.php'; ?>
+<?php include __DIR__ . '/includes/admin/login/loginform.php'; ?>
 </main>
 
 </body>
