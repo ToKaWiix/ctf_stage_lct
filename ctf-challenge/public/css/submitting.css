@@ -9,13 +9,15 @@ body {
     background-color: #F1F1F1;
     display: grid;
     grid-template-columns: repeat(24, 1fr);
+    grid-template-rows: repeat(24, 1fr);
+    overflow: hidden;
 }
-
 
 /* HEADER */
 
 nav {
     grid-column: 1 / 25;
+    grid-row: 1 / 5;
     display: grid;
     grid-template-columns: repeat(24, 1fr);
 }
@@ -25,28 +27,31 @@ nav {
 }
 
 .logo-lct-submit img {
-    width: 25.313rem;
-    height: 9.375rem;
+    width: 21.563rem;
+    height: 8rem;
 }
-
 
 /* FORMULAIRE DE SOUMISSION */
 
 main {
         grid-column: 1 / 25;
+        grid-row: 4 / 25;
         display: grid;
         grid-template-columns: repeat(24, 1fr);
+        grid-template-rows: repeat(24, 1fr);
         height: 100%;
         margin: 0 3.125rem 0 3.125rem;
 }
 
 #form-submit-flag {
-    grid-column: 6 / 20;
+    grid-column: 5 / 21;
+    grid-row: 1 / 23;
     background-color: #333333;
-    padding: 2.313rem 0 2.313rem 0;
+    /* padding: 2.313rem 0 2.313rem 0; */
     border-radius: 1.563rem;
     display: grid;
     grid-template-columns: repeat(14, 1fr);
+    grid-template-rows: repeat(14, 1fr);
 }
 
 #form-submit-flag h2 {
@@ -56,6 +61,7 @@ main {
     font-weight: bold;
     font-size: 1.875rem;
     grid-column: 1 / 15;
+    grid-row: 2 / 3;
 }
 
 form {
@@ -64,21 +70,22 @@ form {
     color: white;
     font-size: 1.563rem;
     grid-column: 2 / 14;
+    grid-row: 3 / 14;
 }
 
 form input, select {
-    height: 5rem;
+    height: 4rem;
     border-radius: 1.188rem;
     padding: 0 1.875rem;
     font-size: 1.563rem;
 }
 
 form label {
-    margin: 1.625rem 0 1.125rem 0;
+    margin: .63rem 0 0.63rem 0;
 }
 
 form p{
-    margin-top: 3rem;
+    margin-top: 1rem; 
     text-align: center;
 }
 

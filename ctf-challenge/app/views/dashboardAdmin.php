@@ -1,5 +1,5 @@
 <?php include __DIR__ . '/includes/admin/dashboard/headerDashboard.php'; ?>
-<?php include __DIR__ . '/includes/admin/navAdmin.php'; ?>
+<?php include __DIR__ . '/includes/admin/dashboard/navAdmin.php'; ?>
 
 <main>
 
