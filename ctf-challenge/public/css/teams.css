@@ -1,0 +1,230 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    grid-template-rows: repeat(24, 1fr);
+    overflow: hidden;
+}
+
+/* HEADER */ 
+
+nav {
+    background-color: #F1F1F1;
+    grid-column: 1 / 25;
+    grid-row: 1 / 4;
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+}
+
+#nav-logo {
+    grid-column: 2 / 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav img {
+    width: 14.625rem;
+    height: 5.375rem;
+}
+
+#nav-tabs {
+    grid-column: 8 / 19;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-item {
+    font-size: 1.5rem;
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: #C1121F;
+}
+
+
+/* LISTE DES ÉQUIPES */ 
+
+main {
+    grid-column: 1 / 25;
+    grid-row: 4 / 25;
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    grid-template-rows: repeat(24, 1fr);
+}
+
+#team-dashboard {
+    grid-column: 1 / 25;
+    grid-row: 1 / 25;
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    grid-template-rows: repeat(24, 1fr);
+}
+
+#team-list-title {
+    grid-column: 1 / 25;
+    grid-row: 1 / 3;
+    text-align: center;
+    color: #111111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
+
+#card-team-list {
+    grid-column: 2 / 16;
+    grid-row: 3 / 23;
+    display: grid;
+    grid-template-columns: repeat(22, 1fr);
+    grid-template-rows: repeat(22, 1fr);
+    background-color: #F1F1F1;
+    border-radius: 1.563rem;
+}
+
+#card-team-list-content {
+    grid-column: 2 / 22;
+    grid-row: 1 / 22;
+    display: grid;
+    grid-template-columns: repeat(22, 1fr);
+    grid-template-rows: repeat(22, 1fr);
+}
+
+#card-team-list-content h3{
+    font-weight: semibold;
+    font-size: 1.5rem;
+    text-align:center;
+    margin: 1rem;
+    grid-column: 1 / 25;
+    grid-row: 1 / 25;
+}
+
+#team-list-table {
+    grid-column: 1 / 25;
+    grid-row: 3 / 25;
+}
+
+table {
+    width: 100%;
+    border-spacing: 0;
+    border-radius: 1rem;
+    overflow: hidden;
+    grid-column: 1 / 24;
+    background-color: #FFFFFF;
+}
+
+th {
+    font-size: 1.563rem;
+    font-weight: medium;
+    background-color: #333333;
+    color: white;
+}
+
+tbody tr td{
+    text-align: center;
+    font-size: 1.875rem;
+    font-weight: semibold;
+}
+
+th, td {
+    border: 1px solid #111;
+    height: 3.8rem;
+}
+
+table thead tr:first-child th:first-child {
+    border-top-left-radius: 1.563rem;
+}
+
+table thead tr:first-child th:last-child {
+    border-top-right-radius: 1.563rem;
+}
+
+table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 1.563rem;
+}
+
+table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 1.563rem;
+}
+
+
+
+/* STATISTIQUES */ 
+
+#card-add-team {
+    grid-column: 17 / 24;
+    grid-row: 3 / 14;
+    background-color: #F1F1F1;
+    border-radius: 1.563rem;
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    grid-template-rows: repeat(24, 1fr);
+    padding: 2rem;
+}
+
+#add-team-title {
+    grid-column: 1/25;
+    grid-row: 2/5;
+    font-weight: semibold;
+    font-size: 1.5rem;
+    text-align:center;
+}
+
+#card-add-team form {
+    grid-column: 1/25;
+    grid-row: 6/24;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#card-add-team form label {
+    font-size: 1.5rem;
+}
+
+#card-add-team form input {
+    font-size: 1.563rem;
+    border-radius: 1.125rem;
+    border: none;
+    padding: 0 1.875rem;
+    height: 3rem;
+}
+
+#submit-login-button{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-column: 2 / 12;
+}
+
+#card-add-team form button {
+    height: 4rem;
+    background-color: #C1121F;
+    border-radius: 1.188rem;
+    grid-column: 2 / 12;
+    color: white;
+    font-size: 1.875rem;
+    border: none;
+    width: 100%;
+}
+
+#card-add-team form button:hover {
+    background-color: #A10F1B;
+    cursor: pointer;
+}
+
+#actions-icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
