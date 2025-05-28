@@ -116,7 +116,7 @@ main {
 #player-list-table {
     grid-column: 1 / 25;
     grid-row: 3 / 25;
-    max-height: 32rem;
+    max-height: 33rem;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -267,6 +267,7 @@ table tbody tr:last-child td:last-child {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-column: 2 / 12;
+    margin-top: 1rem;
 }
 
 #card-add-player form button {
