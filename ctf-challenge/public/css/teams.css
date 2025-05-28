@@ -69,6 +69,7 @@ main {
     display: grid;
     grid-template-columns: repeat(24, 1fr);
     grid-template-rows: repeat(24, 1fr);
+    column-gap: 1.25rem;
 }
 
 #team-list-title {
@@ -159,10 +160,10 @@ table tbody tr:last-child td:last-child {
 
 
 
-/* STATISTIQUES */ 
+/* AJOUTER UNE ÉQUIPE */ 
 
 #card-add-team {
-    grid-column: 17 / 24;
+    grid-column: 16 / 24;
     grid-row: 3 / 14;
     background-color: #F1F1F1;
     border-radius: 1.563rem;
