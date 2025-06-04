@@ -380,7 +380,7 @@ tbody tr td {
     text-align: center;
 }
 
-#card-time-prison form {
+#card-partenaires form {
     grid-column: 3/23;
     grid-row: 9/24;
     display: flex;
@@ -389,15 +389,16 @@ tbody tr td {
     text-align: center;
 }
 
-#card-time-prison input {
+#card-partenaires input {
     height: 2.5rem;
     border-radius: 1rem;
     padding: 0 1rem;
     border: none;
     margin-top: 1rem;
+    width: 100%;
 }
 
-.prison-time-row {
+.partenaires-row {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -405,7 +406,7 @@ tbody tr td {
     align-items: center;
 }
 
-.prison-time-btn-row button {
+.partenaires-btn-row button {
     grid-column: 1/25;
     height: 3rem;
     background-color: #C1121F;
@@ -416,7 +417,7 @@ tbody tr td {
     width: 100%;
 }
 
-.prison-time-btn-row button:hover {
+.partenaires-btn-row button:hover {
     background-color: #A10F1B;
     cursor: pointer;
 }

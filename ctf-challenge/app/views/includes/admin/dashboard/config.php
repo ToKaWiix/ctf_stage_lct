@@ -134,6 +134,15 @@
         <div id="partenaires-title">
             <h3>Partenaires</h3>
         </div>
+        <form action="/partenaires-bande.php" method="post" id="prison-time-form">
+            <div class="partenaires-row">
+                <label for="partenaires" class="sr-only">Partenaires :</label>
+                <input type="longtext" id="partenaires" name="partenaires" required>
+            </div>
+            <div class="partenaires-btn-row">
+                <button type="submit">Valider</button>
+            </div>
+        </form>
     </div>
     <div id="card-give-pts">
         <div id="list-admin-title">
