@@ -145,8 +145,11 @@
         </form>
     </div>
     <div id="card-give-pts">
-        <div id="list-admin-title">
+        <div id="give-pts-title">
             <h3>Attribuer les points</h3>
+        </div>
+        <div class="give-pts-btn-row">
+            <button type="submit">Valider</button>
         </div>
     </div>
 </div>
