@@ -93,8 +93,7 @@ main {
     grid-template-rows: repeat(22, 1fr);
     background-color: var(--color-bg);
     border-radius: 1.563rem;
-    height: 40rem;
-    min-height: 0;
+    min-height: 40rem;
     overflow: hidden;
 }
 
@@ -118,7 +117,7 @@ main {
 #player-list-table {
     grid-column: 1 / 25;
     grid-row: 3 / 25;
-    max-height: 33rem;
+    max-height: 34rem;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -331,4 +330,10 @@ table tbody tr:last-child td:last-child {
 }
 .switch input:checked + .slider:before {
   transform: translateX(18px);
+}
+
+.table-scroll {
+    max-height: 33rem;
+    overflow-y: auto;
+    overflow-x: hidden;
 }

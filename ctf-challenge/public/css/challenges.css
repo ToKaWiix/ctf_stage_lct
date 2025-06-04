@@ -54,7 +54,6 @@ nav img {
     color: var(--color-primary);;
 }
 
-
 /* LISTE DES ÉQUIPES */ 
 
 main {
@@ -63,6 +62,7 @@ main {
     display: grid;
     grid-template-columns: repeat(24, 1fr);
     grid-template-rows: repeat(24, 1fr);
+    min-height: 0;
 }
 
 #team-dashboard {
@@ -72,6 +72,7 @@ main {
     grid-template-columns: repeat(24, 1fr);
     grid-template-rows: repeat(24, 1fr);
     column-gap: 1.25rem;
+    min-height: 0;
 }
 
 #team-list-title {
@@ -93,6 +94,8 @@ main {
     grid-template-rows: repeat(22, 1fr);
     background-color: var(--color-bg);
     border-radius: 1.563rem;
+    min-height: 40rem;
+    overflow: hidden;
 }
 
 #card-team-list-content {
@@ -117,6 +120,12 @@ main {
     grid-row: 3 / 25;
 }
 
+.table-scroll {
+    max-height: 35rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 table {
     width: 100%;
     border-spacing: 0;
@@ -128,24 +137,16 @@ table {
 }
 
 th {
-    font-size: 1.15rem;
-    height: 2.5rem;
-    padding: 0.35rem 0.7rem;
+    font-size: 1.5rem;
     font-weight: medium;
     background-color: var(--color-table-header);
     color: white;
 }
 
-td {
-    font-size: 1.05rem;
-    height: 2.5rem;
-    padding: 0.35rem 0.7rem;
-}
-
-tbody tr td {
-    font-size: 1.05rem;
-    font-weight: normal;
+tbody tr td{
     text-align: center;
+    font-size: 1rem;
+    font-weight: semibold;
 }
 
 th, td {
@@ -169,13 +170,6 @@ table tbody tr:last-child td:last-child {
     border-bottom-right-radius: 1.563rem;
 }
 
-.table-scroll {
-    max-height: 33rem;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-
 /* AJOUTER UN JOUEUR */ 
 
 #card-add-player {
@@ -187,6 +181,8 @@ table tbody tr:last-child td:last-child {
     grid-template-columns: repeat(24, 1fr);
     grid-template-rows: repeat(24, 1fr);
     padding: 2rem;
+    min-height: 40rem;
+    overflow: hidden;
 }
 
 #add-player-title {
@@ -264,7 +260,6 @@ table tbody tr:last-child td:last-child {
     width: 26px !important;
     height: 26px !important;
 }
-
 
 /* AJOUTER UN DÉFI */ 
 

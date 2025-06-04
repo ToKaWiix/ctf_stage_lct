@@ -3,8 +3,8 @@
     --color-primary-dark: #A10F1B;
     --color-secondary: #007AFF;
     --color-bg: #F1F1F1;
-    --color-bg-card: var(--color-white)FFF;
-    --color-text: var(--color-table-border)111;
+    --color-bg-card: #FFFFFF;
+    --color-text: #111111;
     --color-table-header: #333333;
     --color-table-border: #111;
     --color-action-red: #C00F0C;

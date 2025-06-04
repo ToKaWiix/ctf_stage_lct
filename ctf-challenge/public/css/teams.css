@@ -93,6 +93,7 @@ main {
     grid-template-rows: repeat(22, 1fr);
     background-color: var(--color-bg);
     border-radius: 1.563rem;
+    min-height: 40rem;
 }
 
 #card-team-list-content {
