@@ -122,7 +122,7 @@
         </div>
         <form action="/prison-time.php" method="post" id="prison-time-form">
             <div class="prison-time-row">
-                <label for="prison-time">Temps passé en prison :</label>
+                <label for="prison-time" class="sr-only">Temps passé en prison :</label>
                 <input type="datetime-local" id="prison-time" name="prison-time" required>
             </div>
             <div class="prison-time-btn-row">
@@ -131,7 +131,7 @@
         </form>
     </div>
     <div id="card-partenaires">
-        <div id="list-admin-title">
+        <div id="partenaires-title">
             <h3>Partenaires</h3>
         </div>
     </div>
