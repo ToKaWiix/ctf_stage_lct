@@ -9,10 +9,6 @@ class AdminController {
         $page = $_GET['page'] ?? 'homeAdmin';
 
         switch ($page) {
-            case 'homeAdmin':
-                default:
-                    $view = dirname(__DIR__) . '/views/includes/admin/dashboard/homeAdmin.php';
-                    break;
             case 'teams':
                 require_once dirname(__DIR__, 2) . '/app/core/database.php';
                 $pdo = getPDO();
@@ -37,8 +33,12 @@ class AdminController {
             case 'config':
                 $view = dirname(__DIR__) . '/views/includes/admin/dashboard/config.php';
                 break;
+            case 'homeAdmin':
+            default:
+                $view = dirname(__DIR__) . '/views/includes/admin/dashboard/homeAdmin.php';
+                break;
         }
 
         include dirname(__DIR__) . '/views/layouts/admin.php';
     }
-}
+} 

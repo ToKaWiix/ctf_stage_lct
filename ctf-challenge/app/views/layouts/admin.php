@@ -20,7 +20,7 @@
             break;
         case 'homeAdmin':
         default:
-            echo '<link rel="stylesheet" href="/ctf_anna/ctf-challenge/public/css/homeAdmin.css">';
+            echo '<link rel="stylesheet" href="/ctf_anna/ctf-challenge/public/css/dashboard.css">';
             break;
     }
     ?>
