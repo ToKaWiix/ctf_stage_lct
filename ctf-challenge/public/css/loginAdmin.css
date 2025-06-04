@@ -1,3 +1,5 @@
+@import url('variables.css');
+
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +8,7 @@
 }
 
 body {
-    background-color: #F1F1F1;
+    background-color: var(--color-bg);
     display: grid;
     grid-template-columns: repeat(24, 1fr);
     grid-template-rows: repeat(24, 1fr);
@@ -34,7 +36,7 @@ main {
 }
 
 #login-form {
-    background-color: #F1F1F1;
+    background-color: var(--color-bg);
     grid-column: 6 / 20;
     grid-row: 5 / 21;
     display: grid;
@@ -100,7 +102,7 @@ form input {
 form button {
     margin-top: 2rem;
     height: 4.063rem;
-    background-color: #C1121F;
+    background-color: var(--color-primary);;
     border-radius: 1.188rem;
     grid-column: 2 / 12;
     color: white;
@@ -109,6 +111,6 @@ form button {
 }
 
 form button:hover {
-    background-color: #A10F1B;
+    background-color: var(--color-primary-dark);
     cursor: pointer;
 }

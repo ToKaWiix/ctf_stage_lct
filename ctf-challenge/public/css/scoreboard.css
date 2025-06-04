@@ -1,3 +1,5 @@
+@import url('variables.css');
+
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +8,7 @@
 }
 
 body {
-    background-color: #F1F1F1;
+    background-color: var(--color-bg);
     display: grid;
     grid-template-columns: repeat(24, 1fr);
     margin: 0 3.125rem 0 3.125rem;
@@ -66,7 +68,7 @@ table {
 th {
     font-size: 1.563rem;
     font-weight: medium;
-    background-color: #333333;
+    background-color: var(--color-table-header);
     color: white;
 }
 
@@ -77,7 +79,7 @@ tbody tr td{
 }
 
 th, td {
-    border: 1px solid #111;
+    border: 1px solid var(--color-table-border);
     height: 3.938rem;
 }
 
@@ -102,7 +104,7 @@ table tbody tr:last-child td:last-child {
 /* BANDE PARTENAIRES */
 
 #red-partenaires {
-    background-color: #C1121F;
+    background-color: var(--color-primary);;
     margin-top: 0.563rem;
     height: 3.438rem;
     grid-column: 1 / 24;
@@ -231,7 +233,7 @@ table tbody tr:last-child td:last-child {
 /* LÉGENDE */
 
 #card-legend {
-    background-color: #FFFFFF;
+    background-color: var(--color-bg-card);
     width: 36.188rem;
     height: 20.938rem;
     border-radius: 1.563rem;
@@ -253,7 +255,7 @@ table tbody tr:last-child td:last-child {
 /* TOTAL DE FLAGS TROUVÉS */
 
 #total-flags {
-    background-color: #FFFFFF;
+    background-color: var(--color-bg-card);
     width: 12.5rem;
     height: 20.938rem;
     border-radius: 1.563rem;

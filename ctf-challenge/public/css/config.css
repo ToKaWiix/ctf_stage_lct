@@ -1,3 +1,5 @@
+@import url('variables.css');
+
 * {
     margin: 0;
     padding: 0;
@@ -15,7 +17,7 @@ body {
 /* HEADER */ 
 
 nav {
-    background-color: #F1F1F1;
+    background-color: var(--color-bg);
     grid-column: 1 / 25;
     grid-row: 1 / 4;
     display: grid;
@@ -49,7 +51,7 @@ nav img {
 
 .nav-item a {
     text-decoration: none;
-    color: #C1121F;
+    color: var(--color-primary);
 }
 
 
@@ -76,7 +78,7 @@ main {
     grid-column: 1 / 25;
     grid-row: 1 / 3;
     text-align: center;
-    color: #111111;
+    color: var(--color-text);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -89,7 +91,7 @@ main {
     display: grid;
     grid-template-columns: repeat(22, 1fr);
     grid-template-rows: repeat(22, 1fr);
-    background-color: #F1F1F1;
+    background-color: var(--color-bg);
     border-radius: 1.563rem;
 }
 
@@ -149,17 +151,17 @@ main {
 
 #add-admin-form form button {
     height: 3rem;
-    background-color: #C1121F;
+    background-color: var(--color-primary);
     border-radius: 1.188rem;
     grid-column: 2 / 12;
-    color: white;
+    color: var(--color-white);
     font-size: 1.2rem;
     border: none;
     width: 100%;
 }
 
 #add-admin-form form button:hover {
-    background-color: #A10F1B;
+    background-color: var(--color-primary-dark);
     cursor: pointer;
 }
 
@@ -168,7 +170,7 @@ main {
 #card-list-admin {
     grid-column: 9 / 24;
     grid-row: 3 / 14;
-    background-color: #F1F1F1;
+    background-color: var(--color-bg);
     border-radius: 1.563rem;
     display: grid;
     grid-template-columns: repeat(24, 1fr);
@@ -216,7 +218,7 @@ tbody tr td {
 #card-time-ctf {
     grid-column: 2/9;
     grid-row: 15/25;
-    background-color: #F1F1F1;
+    background-color: var(--color-bg);
     border-radius: 1.563rem;
     padding: 1rem;
     display: grid;
@@ -258,7 +260,7 @@ tbody tr td {
 .ctf-time-btn-row button {
     grid-column: 1/25;
     height: 3rem;
-    background-color: #C1121F;
+    background-color: var(--color-primary);
     border-radius: 1.188rem;
     color: white;
     font-size: 1.2rem;
@@ -267,7 +269,7 @@ tbody tr td {
 }
 
 .ctf-time-btn-row button:hover {
-    background-color: #A10F1B;
+    background-color: var(--color-primary-dark);
     cursor: pointer;
 }
 
@@ -285,7 +287,7 @@ tbody tr td {
 #card-time-prison {
     grid-column: 9/13;
     grid-row: 15/25;
-    background-color: #F1F1F1;
+    background-color: var(--color-bg);
     border-radius: 1.563rem;
     padding: 1rem;
     display: grid;
@@ -328,7 +330,7 @@ tbody tr td {
 .prison-time-btn-row button {
     grid-column: 1/25;
     height: 3rem;
-    background-color: #C1121F;
+    background-color: var(--color-primary);
     border-radius: 1.188rem;
     color: white;
     font-size: 1.2rem;
@@ -337,7 +339,7 @@ tbody tr td {
 }
 
 .prison-time-btn-row button:hover {
-    background-color: #A10F1B;
+    background-color: var(--color-primary-dark);
     cursor: pointer;
 }
 
@@ -364,7 +366,7 @@ tbody tr td {
 #card-partenaires {
     grid-column: 13/20;
     grid-row: 15/25;
-    background-color: #F1F1F1;
+    background-color: var(--color-bg);
     border-radius: 1.563rem;
     padding: 1rem;
     display: grid;
@@ -409,16 +411,16 @@ tbody tr td {
 .partenaires-btn-row button {
     grid-column: 1/25;
     height: 3rem;
-    background-color: #C1121F;
+    background-color: var(--color-primary);
     border-radius: 1.188rem;
-    color: white;
+    color: var(--color-white);
     font-size: 1.2rem;
     border: none;
     width: 100%;
 }
 
 .partenaires-btn-row button:hover {
-    background-color: #A10F1B;
+    background-color: var(--color-primary-dark);
     cursor: pointer;
 }
 
@@ -429,7 +431,7 @@ tbody tr td {
 #card-give-pts {
     grid-column: 20/24;
     grid-row: 15/25;
-    background-color: #F1F1F1;
+    background-color: var(--color-bg);
     border-radius: 1.563rem;
     padding: 1rem;
     display: grid;
@@ -476,7 +478,7 @@ tbody tr td {
 .give-pts-btn-row button {
     grid-column: 1/25;
     height: 4rem;
-    background-color: #C1121F;
+    background-color: var(--color-primary);
     border-radius: 1.188rem;
     color: white;
     font-size: 1.2rem;
@@ -485,6 +487,6 @@ tbody tr td {
 }
 
 .give-pts-btn-row button:hover {
-    background-color: #A10F1B;
+    background-color: var(--color-primary-dark);
     cursor: pointer;
 }
