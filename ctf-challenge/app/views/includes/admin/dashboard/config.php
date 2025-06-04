@@ -117,9 +117,18 @@
         </form>
     </div>
     <div id="card-time-prison">
-        <div id="list-admin-title">
+        <div id="prison-time-title">
             <h3>Temps passé en prison</h3>
         </div>
+        <form action="/prison-time.php" method="post" id="prison-time-form">
+            <div class="prison-time-row">
+                <label for="prison-time">Temps passé en prison :</label>
+                <input type="datetime-local" id="prison-time" name="prison-time" required>
+            </div>
+            <div class="prison-time-btn-row">
+                <button type="submit">Valider</button>
+            </div>
+        </form>
     </div>
     <div id="card-partenaires">
         <div id="list-admin-title">

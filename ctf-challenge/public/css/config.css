@@ -280,20 +280,142 @@ tbody tr td {
 
 
 
+/* TEMPS PASSÉ EN PRISON */
 
 #card-time-prison {
     grid-column: 9/13;
     grid-row: 15/25;
     background-color: #F1F1F1;
     border-radius: 1.563rem;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    grid-template-rows: repeat(24, 1fr);
 }
+
+#prison-time-title {
+    grid-column: 1/25;
+    grid-row: 1/7;
+    font-weight: semibold;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+#card-time-prison form {
+    grid-column: 3/23;
+    grid-row: 9/24;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+#card-time-prison input {
+    height: 2.5rem;
+    border-radius: 1rem;
+    padding: 0 1rem;
+    border: none;
+    margin-top: 1rem;
+}
+
+.prison-time-row {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.prison-time-btn-row button {
+    grid-column: 1/25;
+    height: 3rem;
+    background-color: #C1121F;
+    border-radius: 1.188rem;
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+    width: 100%;
+}
+
+.prison-time-btn-row button:hover {
+    background-color: #A10F1B;
+    cursor: pointer;
+}
+
+
+
+
+
+/* PARTENAIRES */
 
 #card-partenaires {
     grid-column: 13/20;
     grid-row: 15/25;
     background-color: #F1F1F1;
     border-radius: 1.563rem;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    grid-template-rows: repeat(24, 1fr);
 }
+
+#partenaires-title {
+    grid-column: 1/25;
+    grid-row: 1/7;
+    font-weight: semibold;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+#card-time-prison form {
+    grid-column: 3/23;
+    grid-row: 9/24;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+#card-time-prison input {
+    height: 2.5rem;
+    border-radius: 1rem;
+    padding: 0 1rem;
+    border: none;
+    margin-top: 1rem;
+}
+
+.prison-time-row {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.prison-time-btn-row button {
+    grid-column: 1/25;
+    height: 3rem;
+    background-color: #C1121F;
+    border-radius: 1.188rem;
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+    width: 100%;
+}
+
+.prison-time-btn-row button:hover {
+    background-color: #A10F1B;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
 
 #card-give-pts {
     grid-column: 20/24;
