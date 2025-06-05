@@ -218,10 +218,12 @@ table tbody tr:last-child td:last-child {
   align-items: center;
   justify-content: center;
   margin-left: 10px;
+  line-height: 1;
+  text-align: center;
 }
 
 .accordion.active .accordion-icon {
-  transform: rotate(45deg);
+  transform: none;
 }
 
 
