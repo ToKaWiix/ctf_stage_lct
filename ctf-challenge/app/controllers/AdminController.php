@@ -16,6 +16,19 @@ class AdminController {
             case 'teams':
                 require_once dirname(__DIR__, 2) . '/app/core/database.php';
                 $pdo = getPDO();
+                
+                // Vérifier si c'est une action de suppression ou d'ajout
+                if (isset($_GET['action'])) {
+                    $controller = new TeamController($pdo);
+                    if ($_GET['action'] === 'delete' && isset($_GET['id'])) {
+                        $controller->deleteTeam();
+                        return;
+                    } elseif ($_GET['action'] === 'add' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+                        $controller->addTeam();
+                        return;
+                    }
+                }
+                
                 $model = new TeamModel($pdo);
                 $teams = $model->getAll();
                 $view = dirname(__DIR__) . '/views/includes/admin/dashboard/teams.php';
