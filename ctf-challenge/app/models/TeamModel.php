@@ -53,6 +53,14 @@ class TeamModel {
         ]);
     }
 
+    public function update($id, $nomEquipe) {
+        $stmt = $this->pdo->prepare("UPDATE ctf_equipe SET ctf_nom_equipe = :nom WHERE id_ctf_equipe = :id");
+        return $stmt->execute([
+            'id' => $id,
+            'nom' => $nomEquipe
+        ]);
+    }
+
     public function delete($id) {
         error_log("Tentative de suppression dans le modèle avec l'ID: " . $id);
         $stmt = $this->pdo->prepare("DELETE FROM ctf_equipe WHERE id_ctf_equipe = :id");

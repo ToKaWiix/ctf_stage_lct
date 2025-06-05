@@ -233,7 +233,7 @@ table tbody tr:last-child td:last-child {
     align-items: center;
 }
 
-/* MODAL DE SUPPRESSION */
+/* MODAL DE SUPPRESSION ET MODIFICATION */
 .modal {
     display: none;
     position: fixed;
@@ -285,6 +285,16 @@ table tbody tr:last-child td:last-child {
     font-size: 1.25rem;
 }
 
+.btn-primary {
+    background-color: var(--color-action-red);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.25rem;
+}
+
 .btn-secondary {
     background-color: var(--color-secondary);
     color: white;
@@ -295,6 +305,34 @@ table tbody tr:last-child td:last-child {
     font-size: 1.25rem;
 }
 
-.delete-team {
+.delete-team, .edit-team {
     cursor: pointer;
+}
+
+.delete-team:hover path, .edit-team:hover path {
+    stroke-width: 5;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1.25rem;
+    border: 1px solid var(--color-secondary);
+    border-radius: 4px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--color-action-red);
 }

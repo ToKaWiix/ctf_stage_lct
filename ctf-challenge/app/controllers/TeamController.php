@@ -37,6 +37,34 @@ class TeamController {
         exit;
     }
 
+    public function editTeam() {
+        if (!isset($_POST['team_id']) || !isset($_POST['team_name'])) {
+            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=teams&error=Données manquantes');
+            exit;
+        }
+
+        $teamId = $_POST['team_id'];
+        $teamName = trim($_POST['team_name']);
+
+        if (empty($teamName)) {
+            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=teams&error=Le nom de l\'équipe ne peut pas être vide');
+            exit;
+        }
+
+        $model = new TeamModel($this->pdo);
+        
+        try {
+            if ($model->update($teamId, $teamName)) {
+                header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=teams&success=3');
+            } else {
+                header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=teams&error=Erreur lors de la modification de l\'équipe');
+            }
+        } catch (\Exception $e) {
+            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=teams&error=' . urlencode($e->getMessage()));
+        }
+        exit;
+    }
+
     public function deleteTeam() {
         if (!isset($_GET['id'])) {
             header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=teams&error=ID de l\'équipe manquant');

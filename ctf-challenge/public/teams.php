@@ -12,6 +12,8 @@ if (isset($_GET['action'])) {
         $controller->deleteTeam();
     } elseif ($_GET['action'] === 'add' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         $controller->addTeam();
+    } elseif ($_GET['action'] === 'edit' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+        $controller->editTeam();
     }
 } else {
     $controller->index();
