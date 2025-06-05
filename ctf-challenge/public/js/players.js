@@ -1,18 +1,3 @@
-var acc = document.getElementsByClassName("accordion");
-var i;
-
-for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-            panel.style.display = "none";
-        } else {
-            panel.style.display = "block";
-        }
-    });
-}
-
 document.addEventListener('DOMContentLoaded', function() {
     // Sélection des éléments
     const deleteButtons = document.querySelectorAll('.delete-player');
@@ -24,6 +9,41 @@ document.addEventListener('DOMContentLoaded', function() {
     const cancelEditBtn = document.getElementById('cancel-edit');
     const playerNameSpan = document.getElementById('player-name');
     const editForm = document.getElementById('edit-player-form');
+
+    // Gestion des accordéons
+    const accordions = document.getElementsByClassName("accordion");
+    for (let i = 0; i < accordions.length; i++) {
+        accordions[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            const panel = this.nextElementSibling;
+            const icon = this.querySelector('.accordion-icon');
+            
+            if (this.classList.contains("active")) {
+                panel.classList.add("active");
+                icon.textContent = '-';
+            } else {
+                panel.classList.remove("active");
+                icon.textContent = '+';
+            }
+        });
+    }
+
+    // Ouvrir l'accordéon de l'équipe spécifiée dans l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const openTeamId = urlParams.get('open_team');
+    if (openTeamId) {
+        const accordions = document.querySelectorAll('.accordion');
+        accordions.forEach(accordion => {
+            const teamId = accordion.getAttribute('data-team-id');
+            if (teamId === openTeamId) {
+                accordion.classList.add("active");
+                const panel = accordion.nextElementSibling;
+                panel.classList.add("active");
+                const icon = accordion.querySelector('.accordion-icon');
+                icon.textContent = '-';
+            }
+        });
+    }
 
     // Gestion de la suppression
     deleteButtons.forEach(button => {
@@ -48,12 +68,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const playerLastname = this.dataset.playerLastname;
             const playerNickname = this.dataset.playerNickname;
             const playerTeam = this.dataset.playerTeam;
+            const playerPrison = this.dataset.playerPrison === '1';
             
             document.getElementById('edit-player-id').value = playerId;
             document.getElementById('edit-player-firstname').value = playerFirstname;
             document.getElementById('edit-player-lastname').value = playerLastname;
             document.getElementById('edit-player-nickname').value = playerNickname;
             document.getElementById('edit-player-team').value = playerTeam;
+            document.getElementById('edit-player-prison').checked = playerPrison;
             
             editModal.style.display = 'block';
         });
@@ -77,22 +99,4 @@ document.addEventListener('DOMContentLoaded', function() {
             closeModal(editModal);
         }
     });
-
-    // Gestion des accordéons
-    const acc = document.getElementsByClassName("accordion");
-    for (let i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            const panel = this.nextElementSibling;
-            const icon = this.querySelector('.accordion-icon');
-            
-            if (panel.classList.contains("active")) {
-                panel.classList.remove("active");
-                icon.textContent = '+';
-            } else {
-                panel.classList.add("active");
-                icon.textContent = '-';
-            }
-        });
-    }
 }); 

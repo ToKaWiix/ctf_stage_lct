@@ -10,7 +10,11 @@ class TeamModel {
     }
 
     public function getAll() {
-        $stmt = $this->pdo->query("SELECT id_ctf_equipe, ctf_nom_equipe, ctf_score_total, ctf_background_equipe FROM ctf_equipe");
+        $stmt = $this->pdo->query("
+            SELECT id_ctf_equipe, ctf_nom_equipe, ctf_score_total, ctf_background_equipe 
+            FROM ctf_equipe 
+            ORDER BY LOWER(ctf_nom_equipe) ASC
+        ");
         return $stmt->fetchAll();
     }
 

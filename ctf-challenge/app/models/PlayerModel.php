@@ -12,8 +12,8 @@ class PlayerModel {
         $stmt = $this->pdo->query("
             SELECT j.*, e.ctf_nom_equipe 
             FROM ctf_joueur j 
-            LEFT JOIN ctf_equipe e ON j.id_ctf_equipe = e.id_ctf_equipe
-            ORDER BY e.ctf_nom_equipe, j.ctf_nom
+            RIGHT JOIN ctf_equipe e ON j.id_ctf_equipe = e.id_ctf_equipe
+            ORDER BY e.ctf_nom_equipe ASC, j.ctf_nom ASC, j.ctf_prenom ASC
         ");
         return $stmt->fetchAll();
     }
@@ -84,14 +84,16 @@ class PlayerModel {
                     ctf_nom = :nom,
                     ctf_prenom = :prenom,
                     ctf_pseudo = :pseudo,
-                    id_ctf_equipe = :equipe";
+                    id_ctf_equipe = :equipe,
+                    ctf_prison = :prison";
             
             $params = [
                 'id' => $data['player_id'],
                 'nom' => $data['lastname'],
                 'prenom' => $data['firstname'],
                 'pseudo' => $data['nickname'],
-                'equipe' => $data['team']
+                'equipe' => $data['team'],
+                'prison' => isset($data['prison']) ? 1 : 0
             ];
 
             // Ajouter la photo à la requête si une nouvelle photo a été uploadée

@@ -84,7 +84,9 @@ class PlayerController {
                 'players' => $players
             ];
             
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=players&success=3');
+            // Rediriger avec l'ID de l'équipe
+            $teamId = $_POST['team'];
+            header("Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=players&success=3&open_team={$teamId}");
         } catch (\Exception $e) {
             header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=players&error=' . urlencode($e->getMessage()));
         }
