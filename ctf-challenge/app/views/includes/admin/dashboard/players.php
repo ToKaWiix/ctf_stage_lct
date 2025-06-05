@@ -16,23 +16,6 @@ unset($_SESSION['players_data']);
             <?= htmlspecialchars($_GET['error']) ?>
         </div>
     <?php endif; ?>
-    <?php if (isset($_GET['success'])): ?>
-        <div class="alert alert-success">
-            <?php
-            switch ($_GET['success']) {
-                case '1':
-                    echo "Le joueur a été ajouté avec succès.";
-                    break;
-                case '2':
-                    echo "Le joueur a été supprimé avec succès.";
-                    break;
-                case '3':
-                    echo "Le joueur a été modifié avec succès.";
-                    break;
-            }
-            ?>
-        </div>
-    <?php endif; ?>
     <div id="card-player-list">
         <div id="card-player-list-content">
             <h3>Liste des joueurs par équipe</h3>
@@ -47,7 +30,7 @@ unset($_SESSION['players_data']);
                     </div>
                 <?php endif;
                 $currentTeam = $player['ctf_nom_equipe']; ?>
-                <button class="accordion">Équipe <?= htmlspecialchars($currentTeam) ?> :</button>
+                <button class="accordion">Équipe <?= htmlspecialchars($currentTeam) ?><span class="accordion-icon">+</span></button>
                 <div class="panel">
                     <table>
                         <thead>
@@ -96,9 +79,9 @@ unset($_SESSION['players_data']);
                 </tr>
                 <?php endforeach; ?>
                 <?php if ($currentTeam !== null): ?>
-                    </tbody>
-                </table>
-            </div>
+                        </tbody>
+                    </table>
+                </div>
                 <?php endif; ?>
             </div>
         </div>
@@ -148,7 +131,7 @@ unset($_SESSION['players_data']);
 <div id="edit-modal" class="modal">
     <div class="modal-content">
         <h3>Modifier le joueur</h3>
-        <form id="edit-player-form" action="/ctf_anna/ctf-challenge/public/players.php?action=edit" method="post">
+        <form id="edit-player-form" action="/ctf_anna/ctf-challenge/public/players.php?action=edit" method="post" enctype="multipart/form-data">
             <input type="hidden" id="edit-player-id" name="player_id">
             <div class="form-group">
                 <label for="edit-player-firstname">Prénom :</label>
@@ -172,6 +155,11 @@ unset($_SESSION['players_data']);
                     <?php endforeach; ?>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="edit-player-photo">Photo :</label>
+                <input type="file" id="edit-player-photo" name="photo" accept="image/*">
+                <small>Laissez vide pour conserver la photo actuelle</small>
+            </div>
             <div class="modal-buttons">
                 <button type="submit" class="btn-primary">Valider</button>
                 <button type="button" id="cancel-edit" class="btn-secondary">Annuler</button>
@@ -179,22 +167,5 @@ unset($_SESSION['players_data']);
         </form>
     </div>
 </div>
-
-<script>
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var panel = this.nextElementSibling;
-            if (panel.style.display === "block") {
-                panel.style.display = "none";
-            } else {
-                panel.style.display = "block";
-            }
-        });
-    }
-</script>
 
 <script src="/ctf_anna/ctf-challenge/public/js/players.js"></script>

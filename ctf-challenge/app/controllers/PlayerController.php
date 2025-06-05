@@ -72,6 +72,18 @@ class PlayerController {
         try {
             $playerModel = new PlayerModel($this->pdo);
             $playerModel->update($_POST);
+            
+            // Recharger les données
+            $teamModel = new TeamModel($this->pdo);
+            $teams = $teamModel->getAll();
+            $players = $playerModel->getAll();
+            
+            // Stocker les données dans la session
+            $_SESSION['players_data'] = [
+                'teams' => $teams,
+                'players' => $players
+            ];
+            
             header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=players&success=3');
         } catch (\Exception $e) {
             header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=players&error=' . urlencode($e->getMessage()));
@@ -88,6 +100,18 @@ class PlayerController {
         try {
             $playerModel = new PlayerModel($this->pdo);
             $playerModel->delete($_GET['id']);
+            
+            // Recharger les données
+            $teamModel = new TeamModel($this->pdo);
+            $teams = $teamModel->getAll();
+            $players = $playerModel->getAll();
+            
+            // Stocker les données dans la session
+            $_SESSION['players_data'] = [
+                'teams' => $teams,
+                'players' => $players
+            ];
+            
             header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=players&success=2');
         } catch (\Exception $e) {
             header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=players&error=' . urlencode($e->getMessage()));

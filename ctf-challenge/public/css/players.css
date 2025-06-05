@@ -93,7 +93,7 @@ main {
     grid-template-rows: repeat(22, 1fr);
     background-color: var(--color-bg);
     border-radius: 1.563rem;
-    min-height: 40rem;
+    height: 40rem;
     overflow: hidden;
 }
 
@@ -103,6 +103,7 @@ main {
     display: grid;
     grid-template-columns: repeat(22, 1fr);
     grid-template-rows: repeat(22, 1fr);
+    overflow: hidden;
 }
 
 #card-player-list-content h3{
@@ -179,6 +180,10 @@ table tbody tr:last-child td:last-child {
   outline: none;
   transition: 0.4s;
   font-size: 1.5625rem;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
@@ -188,24 +193,35 @@ table tbody tr:last-child td:last-child {
 
 /* Style the accordion panel. Note: hidden by default */
 .panel {
-  padding: 18px 18px;
   background-color: white;
-  display: none;
+  max-height: 0;
   overflow: hidden;
-  max-height: 15rem;
   transition: max-height 0.3s ease;
 }
 
-.accordion:after {
-  content: '\02795'; /* Unicode character for "plus" sign (+) */
-  font-size: 13px;
-  color: #777;
-  float: right;
-  margin-left: 5px;
+.panel.active {
+  max-height: 34rem;
+  overflow-y: auto;
 }
 
-.active:after {
-  content: "\2796"; /* Unicode character for "minus" sign (-) */
+.table-container {
+  padding: 18px;
+}
+
+.accordion-icon {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.accordion.active .accordion-icon {
+  transform: rotate(45deg);
 }
 
 
@@ -336,4 +352,108 @@ table tbody tr:last-child td:last-child {
     max-height: 33rem;
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+/* MODAL DE SUPPRESSION ET MODIFICATION (copié de teams.css) */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    min-width: 300px;
+}
+
+.modal-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+}
+
+.modal-content p {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-text);
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.btn-danger {
+    background-color: var(--color-action-red);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.25rem;
+}
+
+.btn-primary {
+    background-color: var(--color-action-red);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.25rem;
+}
+
+.btn-secondary {
+    background-color: var(--color-secondary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.25rem;
+}
+
+.delete-player, .edit-player {
+    cursor: pointer;
+}
+
+.delete-player:hover path, .edit-player:hover path {
+    stroke-width: 5;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1.25rem;
+    border: 1px solid var(--color-secondary);
+    border-radius: 4px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--color-action-red);
 }

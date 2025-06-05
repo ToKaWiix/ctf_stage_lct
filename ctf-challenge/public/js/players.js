@@ -1,3 +1,18 @@
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+            panel.style.display = "none";
+        } else {
+            panel.style.display = "block";
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Sélection des éléments
     const deleteButtons = document.querySelectorAll('.delete-player');
@@ -20,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
             deleteModal.style.display = 'block';
             
             confirmDeleteBtn.onclick = function() {
-                window.location.href = `/ctf_anna/ctf-challenge/public/players.php?action=delete&id=${playerId}`;
+                window.location.href = `/ctf_anna/ctf-challenge/public/dashboard.php?page=players&action=delete&id=${playerId}`;
             };
         });
     });
@@ -69,10 +84,14 @@ document.addEventListener('DOMContentLoaded', function() {
         acc[i].addEventListener("click", function() {
             this.classList.toggle("active");
             const panel = this.nextElementSibling;
-            if (panel.style.maxHeight) {
-                panel.style.maxHeight = null;
+            const icon = this.querySelector('.accordion-icon');
+            
+            if (panel.classList.contains("active")) {
+                panel.classList.remove("active");
+                icon.textContent = '+';
             } else {
-                panel.style.maxHeight = panel.scrollHeight + "px";
+                panel.classList.add("active");
+                icon.textContent = '-';
             }
         });
     }
