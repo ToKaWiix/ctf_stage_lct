@@ -237,7 +237,7 @@ table tbody tr:last-child td:last-child {
     font-size: 1.875rem;
 }
 
-#logout-btn button{
+#logout-btn form{
     background-color: var(--color-primary);;
     color: var(--color-bg-card);
     font-size: 1.5625rem;
@@ -245,4 +245,19 @@ table tbody tr:last-child td:last-child {
     height: 3.4375rem;
     border-radius: 1.125rem;
     border: none;
+}
+
+#logout-btn button{
+    background-color: var(--color-primary);
+    color: var(--color-bg-card);
+    font-size: 1.5625rem;
+    width: 100%;
+    height: 3.4375rem;
+    border-radius: 1.125rem;
+    border: none;
+    cursor: pointer;
+}
+
+#logout-btn button:hover {
+    background-color: var(--color-primary-dark);
 }

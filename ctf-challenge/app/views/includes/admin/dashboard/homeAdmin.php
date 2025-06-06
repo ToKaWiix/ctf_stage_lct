@@ -76,7 +76,9 @@
     <div id="card-logout">
         <div id="logout-btn">
             <h5>Déconnexion</h5>
-            <button>Déconnexion</button>
+            <form action="/ctf_anna/ctf-challenge/public/logoutAdmin.php" method="post">
+                <button type="submit">Déconnexion</button>
+            </form>
         </div>
     </div>
 </div>

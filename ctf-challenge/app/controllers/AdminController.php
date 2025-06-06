@@ -6,7 +6,19 @@ use Anna\CtfChallenge\Models\PlayerModel;
 // Ajoute ici les use pour les autres modèles si besoin (PlayerModel, ChallengeModel...)
 
 class AdminController {
+    private $pdo;
+
+    public function __construct($pdo) {
+        $this->pdo = $pdo;
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+    }
+
     public function route() {
+        // Vérifier si l'utilisateur est connecté
+        requireLogin();
+
         $page = $_GET['page'] ?? 'homeAdmin';
 
         switch ($page) {
@@ -15,12 +27,9 @@ class AdminController {
                     $view = dirname(__DIR__) . '/views/includes/admin/dashboard/homeAdmin.php';
                     break;
             case 'teams':
-                require_once dirname(__DIR__, 2) . '/app/core/database.php';
-                $pdo = getPDO();
-                
                 // Vérifier si c'est une action de suppression ou d'ajout
                 if (isset($_GET['action'])) {
-                    $controller = new TeamController($pdo);
+                    $controller = new TeamController($this->pdo);
                     if ($_GET['action'] === 'delete' && isset($_GET['id'])) {
                         $controller->deleteTeam();
                         return;
@@ -30,17 +39,14 @@ class AdminController {
                     }
                 }
                 
-                $model = new TeamModel($pdo);
+                $model = new TeamModel($this->pdo);
                 $teams = $model->getAll();
                 $view = dirname(__DIR__) . '/views/includes/admin/dashboard/teams.php';
                 break;
             case 'players':
-                require_once dirname(__DIR__, 2) . '/app/core/database.php';
-                $pdo = getPDO();
-                
                 // Vérifier si c'est une action de suppression, d'ajout ou de modification
                 if (isset($_GET['action'])) {
-                    $controller = new PlayerController($pdo);
+                    $controller = new PlayerController($this->pdo);
                     if ($_GET['action'] === 'delete' && isset($_GET['id'])) {
                         $controller->deletePlayer();
                         return;
@@ -53,7 +59,7 @@ class AdminController {
                     }
                 }
                 
-                $controller = new PlayerController($pdo);
+                $controller = new PlayerController($this->pdo);
                 $controller->index();
                 $view = dirname(__DIR__) . '/views/includes/admin/dashboard/players.php';
                 break;
