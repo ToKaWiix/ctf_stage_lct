@@ -29,6 +29,8 @@ class AdminController {
         switch ($page) {
             case 'homeAdmin':
                 default:
+                    $teamModel = new TeamModel($this->pdo);
+                    $teamCount = $teamModel->getTeamCount();
                     $view = dirname(__DIR__) . '/views/includes/admin/dashboard/homeAdmin.php';
                     break;
             case 'teams':

@@ -66,7 +66,7 @@
         </div>
         <div id="statistics-teams">
             <h5>Nombre d'équipes inscrites :</h5>
-            <h3>8</h3>
+            <h3><?= $teamCount ?></h3>
         </div>
         <div id="statistics-flags">
             <h5>Total de flags trouvés :</h5>

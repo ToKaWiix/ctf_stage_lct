@@ -74,11 +74,15 @@ class TeamController {
         $teamId = $_GET['id'];
         error_log("Tentative de suppression de l'équipe avec l'ID: " . $teamId);
 
-        $teamModel = new TeamModel($this->pdo);
-        
         try {
+            // Supprimer d'abord tous les joueurs de l'équipe
+            $stmt = $this->pdo->prepare("DELETE FROM ctf_joueur WHERE id_ctf_equipe = :id");
+            $stmt->execute(['id' => $teamId]);
+            
+            // Ensuite supprimer l'équipe
+            $teamModel = new TeamModel($this->pdo);
             if ($teamModel->delete($teamId)) {
-                error_log("Équipe supprimée avec succès");
+                error_log("Équipe et ses joueurs supprimés avec succès");
                 header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=teams&success=2');
             } else {
                 error_log("Échec de la suppression de l'équipe");

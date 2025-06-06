@@ -18,7 +18,7 @@ class TeamModel {
         return $stmt->fetchAll();
     }
 
-    private function getTeamCount() {
+    public function getTeamCount() {
         $stmt = $this->pdo->query("SELECT COUNT(*) FROM ctf_equipe");
         return (int) $stmt->fetchColumn();
     }
@@ -67,9 +67,31 @@ class TeamModel {
 
     public function delete($id) {
         error_log("Tentative de suppression dans le modèle avec l'ID: " . $id);
-        $stmt = $this->pdo->prepare("DELETE FROM ctf_equipe WHERE id_ctf_equipe = :id");
-        $result = $stmt->execute(['id' => $id]);
-        error_log("Résultat de la suppression: " . ($result ? "succès" : "échec"));
-        return $result;
+        
+        try {
+            // Commencer une transaction
+            $this->pdo->beginTransaction();
+            
+            // Supprimer d'abord tous les joueurs de l'équipe
+            $stmt = $this->pdo->prepare("DELETE FROM ctf_joueur WHERE id_ctf_equipe = :id");
+            $stmt->execute(['id' => $id]);
+            
+            // Ensuite supprimer l'équipe
+            $stmt = $this->pdo->prepare("DELETE FROM ctf_equipe WHERE id_ctf_equipe = :id");
+            $result = $stmt->execute(['id' => $id]);
+            
+            // Valider la transaction
+            $this->pdo->commit();
+            
+            error_log("Résultat de la suppression: " . ($result ? "succès" : "échec"));
+            return $result;
+        } catch (\Exception $e) {
+            // En cas d'erreur, annuler la transaction
+            if ($this->pdo->inTransaction()) {
+                $this->pdo->rollBack();
+            }
+            error_log("Erreur lors de la suppression: " . $e->getMessage());
+            throw $e;
+        }
     }
 }

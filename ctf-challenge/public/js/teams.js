@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Confirmation de suppression pour l\'équipe ID:', teamId);
         
         // Rediriger vers la page de suppression
-        window.location.href = `/ctf_anna/ctf-challenge/public/dashboard.php?page=teams&action=delete&id=${teamId}`;
+        window.location.href = `/ctf_anna/ctf-challenge/public/teams.php?action=delete&id=${teamId}`;
     });
     
     // Gérer le clic sur le bouton d'annulation de suppression
