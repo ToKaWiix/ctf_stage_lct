@@ -7,56 +7,26 @@
             <h3>Tableau des scores par équipe</h3>
             <div id="scoreboard-admin">
                 <table>
-            <thead>
-                <tr>
-                    <th>Rang</th>
-                    <th>Équipe</th>
-                    <th>Score</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Équipe 1</td>
-                    <td>🟢</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Équipe 1</td>
-                    <td>🟢</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Équipe 1</td>
-                    <td>🟢</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Équipe 1</td>
-                    <td>🟢</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Équipe 1</td>
-                    <td>🟢</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>Équipe 1</td>
-                    <td>🟢</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>Équipe 1</td>
-                    <td>🟢</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>Équipe 1</td>
-                    <td>🟢</td>
-                </tr>
-            </tbody>
-        </table>
+                    <thead>
+                        <tr>
+                            <th>Rang</th>
+                            <th>Équipe</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                        $rank = 1;
+                        foreach ($teams as $team): 
+                        ?>
+                            <tr>
+                                <td><?= $rank++ ?></td>
+                                <td><?= htmlspecialchars($team['ctf_nom_equipe']) ?></td>
+                                <td><?= $team['ctf_score_total'] ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

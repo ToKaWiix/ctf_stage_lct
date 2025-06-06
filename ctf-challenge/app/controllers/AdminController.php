@@ -30,6 +30,7 @@ class AdminController {
             case 'homeAdmin':
                 default:
                     $teamModel = new TeamModel($this->pdo);
+                    $teams = $teamModel->getAllSortedByScore();
                     $teamCount = $teamModel->getTeamCount();
                     $view = dirname(__DIR__) . '/views/includes/admin/dashboard/homeAdmin.php';
                     break;
@@ -83,5 +84,12 @@ class AdminController {
         }
 
         include dirname(__DIR__) . '/views/layouts/admin.php';
+    }
+
+    public function home() {
+        $teamModel = new \Anna\CtfChallenge\Models\TeamModel($this->pdo);
+        $teams = $teamModel->getAllSortedByScore();
+        $teamCount = $teamModel->getTeamCount();
+        require dirname(__DIR__) . '/views/includes/admin/dashboard/homeAdmin.php';
     }
 }
