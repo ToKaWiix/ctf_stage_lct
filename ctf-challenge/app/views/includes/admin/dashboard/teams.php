@@ -2,11 +2,6 @@
     <div id="team-list-title">
         <h2>Gestion des équipes</h2>
     </div>
-    <?php if (isset($_GET['error'])): ?>
-        <div class="alert alert-error">
-            <?= htmlspecialchars($_GET['error']) ?>
-        </div>
-    <?php endif; ?>
     <div id="card-team-list">
         <div id="card-team-list-content">
             <h3>Liste des équipes</h3>
@@ -86,6 +81,17 @@
                 <button type="button" id="cancel-edit" class="btn-secondary">Annuler</button>
             </div>
         </form>
+    </div>
+</div>
+
+<!-- Modal d'erreur -->
+<div id="error-modal" class="modal">
+    <div class="modal-content">
+        <h3>Erreur</h3>
+        <p id="error-message"></p>
+        <div class="modal-buttons">
+            <button id="close-error" class="btn-secondary">Fermer</button>
+        </div>
     </div>
 </div>
 

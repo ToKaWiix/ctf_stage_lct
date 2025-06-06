@@ -10,13 +10,42 @@ document.addEventListener('DOMContentLoaded', function() {
     // Sélectionner les modals et leurs éléments
     const deleteModal = document.getElementById('delete-modal');
     const editModal = document.getElementById('edit-modal');
+    const errorModal = document.getElementById('error-modal');
     const teamNameSpan = document.getElementById('team-name');
+    const errorMessage = document.getElementById('error-message');
     const confirmDeleteButton = document.getElementById('confirm-delete');
     const cancelDeleteButton = document.getElementById('cancel-delete');
     const cancelEditButton = document.getElementById('cancel-edit');
+    const closeErrorButton = document.getElementById('close-error');
     const editTeamForm = document.getElementById('edit-team-form');
     const editTeamIdInput = document.getElementById('edit-team-id');
     const editTeamNameInput = document.getElementById('edit-team-name');
+
+    // Vérifier s'il y a un message d'erreur dans l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const error = urlParams.get('error');
+    if (error) {
+        errorMessage.textContent = decodeURIComponent(error);
+        errorModal.style.display = 'block';
+    }
+
+    // Gérer le clic sur le bouton de fermeture de la modale d'erreur
+    closeErrorButton.addEventListener('click', function() {
+        errorModal.style.display = 'none';
+        // Nettoyer l'URL
+        const newUrl = window.location.pathname + '?page=teams';
+        window.history.replaceState({}, '', newUrl);
+    });
+
+    // Fermer la modale d'erreur si l'utilisateur clique en dehors
+    window.addEventListener('click', function(event) {
+        if (event.target === errorModal) {
+            errorModal.style.display = 'none';
+            // Nettoyer l'URL
+            const newUrl = window.location.pathname + '?page=teams';
+            window.history.replaceState({}, '', newUrl);
+        }
+    });
     
     // Ajouter un écouteur d'événement à chaque bouton de suppression
     deleteButtons.forEach(button => {
