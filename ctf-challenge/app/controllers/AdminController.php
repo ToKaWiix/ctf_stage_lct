@@ -1,6 +1,11 @@
 <?php
 namespace Anna\CtfChallenge\Controllers;
 
+require_once dirname(__DIR__) . '/models/TeamModel.php';
+require_once dirname(__DIR__) . '/models/PlayerModel.php';
+require_once dirname(__DIR__) . '/controllers/TeamController.php';
+require_once dirname(__DIR__) . '/controllers/PlayerController.php';
+
 use Anna\CtfChallenge\Models\TeamModel;
 use Anna\CtfChallenge\Models\PlayerModel;
 // Ajoute ici les use pour les autres modèles si besoin (PlayerModel, ChallengeModel...)

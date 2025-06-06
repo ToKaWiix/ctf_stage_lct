@@ -20,38 +20,46 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Si l'utilisateur est déjà connecté, rediriger vers le dashboard
 if (isLoggedIn()) {
+    error_log("loginAdmin.php - Utilisateur déjà connecté, redirection vers dashboard");
     header('Location: /ctf_anna/ctf-challenge/public/dashboard.php');
     exit;
 }
 
 $error = null; // Initialiser l'erreur à null par défaut
 
-// Vérifier si le formulaire a été soumis (méthode POST et données présentes)
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
+// Vérifier si le formulaire a été soumis en POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    error_log("loginAdmin.php - Formulaire soumis en POST");
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
 
     // Vérifier que les champs ne sont pas vides
     if (empty($username) || empty($password)) {
-        $error = 'Champs manquants';
+        error_log("loginAdmin.php - Champs vides");
+        $error = 'Identifiant ou mot de passe manquant.';
     } else {
         try {
             $pdo = getPDO();
-            $adminModel = new \Anna\CtfChallenge\Models\AdminModel($pdo);
             $authController = new \Anna\CtfChallenge\Controllers\AuthController($pdo);
 
             // Tenter la connexion
+            error_log("loginAdmin.php - Tentative de connexion pour: " . $username);
             if ($authController->login($username, $password)) {
+                error_log("loginAdmin.php - Connexion réussie, redirection vers dashboard");
                 // Redirection vers le dashboard en cas de succès
                 header('Location: /ctf_anna/ctf-challenge/public/dashboard.php');
                 exit;
             } else {
-                $error = 'Identifiants invalides';
+                error_log("loginAdmin.php - Échec de la connexion");
+                $error = 'Identifiants invalides.';
             }
         } catch (\Exception $e) {
-            $error = $e->getMessage();
+            error_log("loginAdmin.php - Exception: " . $e->getMessage());
+            $error = 'Une erreur est survenue lors de la connexion.';
         }
     }
+} else {
+    error_log("loginAdmin.php - Pas de soumission de formulaire ou méthode non POST");
 }
 
 // --- La div d'erreur est maintenant toujours générée, sa visibilité est contrôlée par JS ---
@@ -79,10 +87,11 @@ include dirname(__DIR__) . '/app/views/includes/admin/login/headerAdmin.php';
                         <button type="submit">Connexion</button>
                     </div>
                 </form>
-                <!-- La div d'erreur est toujours présente -->
-                <div class="error-message" style="text-align: center; color: red; margin-top: 10px;">
-                    <?= htmlspecialchars($error ?? '') // Affiche l'erreur si définie, sinon une chaîne vide ?>
-                </div>
+                <?php if (!empty($error)): ?>
+                    <div class="error-message" style="text-align: center; color: red; margin-top: 10px;">
+                        <?= htmlspecialchars($error) ?>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -95,14 +104,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const errorMessageDiv = document.querySelector('.error-message');
 
     if (errorMessageDiv) {
-        const content = errorMessageDiv.textContent;
-        const trimmedContent = content.trim();
+        const content = errorMessageDiv.textContent.trim();
         console.log("Contenu brut de la div d'erreur : '" + content + "'");
-        console.log("Contenu trimé de la div d'erreur : '" + trimmedContent + "'");
-        console.log("Longueur du contenu trimé : " + trimmedContent.length);
+        console.log("Longueur du contenu trimé : " + content.length);
 
         // Vérifie si la div existe et si elle contient du texte (pas juste des espaces blancs)
-        if (trimmedContent.length > 0) {
+        if (content.length > 0) {
             console.log("Contenu détecté, affiche la div.");
             errorMessageDiv.style.display = 'block'; // Rend la div visible
         } else {

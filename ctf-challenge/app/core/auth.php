@@ -6,7 +6,21 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 function isLoggedIn() {
-    return isset($_SESSION['admin_id']) && !empty($_SESSION['admin_id']);
+    error_log("isLoggedIn - Vérification de la session");
+    error_log("isLoggedIn - Session: " . print_r($_SESSION, true));
+    
+    if (!isset($_SESSION['admin_id']) || empty($_SESSION['admin_id'])) {
+        error_log("isLoggedIn - Pas d'admin_id dans la session");
+        return false;
+    }
+    
+    if (!isset($_SESSION['admin_username']) || empty($_SESSION['admin_username'])) {
+        error_log("isLoggedIn - Pas d'admin_username dans la session");
+        return false;
+    }
+    
+    error_log("isLoggedIn - Session valide pour admin: " . $_SESSION['admin_username']);
+    return true;
 }
 
 function requireLogin() {
