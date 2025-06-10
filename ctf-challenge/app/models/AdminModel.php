@@ -95,4 +95,20 @@ class AdminModel {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(['id' => $adminId]);
     }
+
+
+    public function getCtfTime() {
+        $sql = "SELECT ctf_start_time, ctf_end_time FROM ctf_config WHERE id_ctf_config = 1";
+        $stmt = $this->pdo->query($sql);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function updateCtfTime($start, $end) {
+        $sql = "UPDATE ctf_config SET ctf_start_time = :start, ctf_end_time = :end WHERE id_ctf_config = 1";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'start' => $start,
+            'end' => $end
+        ]);
+    }
 } 

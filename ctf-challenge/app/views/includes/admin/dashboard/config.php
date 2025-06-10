@@ -55,14 +55,16 @@
         <div id="ctf-time-title">
             <h3>Durée du CTF</h3>
         </div>
-        <form action="/start-ctf.php" method="post" id="ctf-time-form">
+        <form action="/ctf_anna/ctf-challenge/public/dashboard.php?page=config&action=update_ctf_time" method="post" id="ctf-time-form">
             <div class="ctf-time-row">
                 <label for="start-time">Début du CTF :</label>
-                <input type="datetime-local" id="start-time" name="start-time" required>
+                <input type="datetime-local" id="start-time" name="start-time" required
+                    value="<?= isset($ctfTime['ctf_start_time']) ? date('Y-m-d\TH:i', strtotime($ctfTime['ctf_start_time'])) : '' ?>">
             </div>
             <div class="ctf-time-row">
                 <label for="end-time">Fin du CTF :</label>
-                <input type="datetime-local" id="end-time" name="end-time" required>
+                <input type="datetime-local" id="end-time" name="end-time" required
+                    value="<?= isset($ctfTime['ctf_end_time']) ? date('Y-m-d\TH:i', strtotime($ctfTime['ctf_end_time'])) : '' ?>">
             </div>
             <div class="ctf-time-btn-row">
                 <button type="submit">Valider</button>

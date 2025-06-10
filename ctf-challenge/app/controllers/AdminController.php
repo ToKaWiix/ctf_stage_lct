@@ -102,9 +102,14 @@ class AdminController {
                     $this->addAdmin();
                     return;
                 }
+                if (isset($_GET['action']) && $_GET['action'] === 'update_ctf_time' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $this->updateCtfTime();
+                    return;
+                }
                 require_once dirname(__DIR__) . '/models/AdminModel.php';
                 $adminModel = new \Anna\CtfChallenge\Models\AdminModel($this->pdo);
                 $admins = $adminModel->getAllAdmins();
+                $ctfTime = $adminModel->getCtfTime();
                 $view = dirname(__DIR__) . '/views/includes/admin/dashboard/config.php';
                 break;
         }
@@ -153,6 +158,23 @@ class AdminController {
 
         $adminModel->deleteAdmin($adminId);
         header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=config&success=2');
+        exit;
+    }
+
+    public function updateCtfTime() {
+        require_once dirname(__DIR__) . '/models/AdminModel.php';
+        $adminModel = new \Anna\CtfChallenge\Models\AdminModel($this->pdo);
+
+        $start = $_POST['start-time'] ?? null;
+        $end = $_POST['end-time'] ?? null;
+
+        if (!$start || !$end) {
+            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=config&error=Champs manquants');
+            exit;
+        }
+
+        $adminModel->updateCtfTime($start, $end);
+        header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=config&success=3');
         exit;
     }
 }
