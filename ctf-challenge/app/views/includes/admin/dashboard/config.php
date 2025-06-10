@@ -75,10 +75,11 @@
         <div id="prison-time-title">
             <h3>Temps passé en prison</h3>
         </div>
-        <form action="/prison-time.php" method="post" id="prison-time-form">
+        <form action="/ctf_anna/ctf-challenge/public/dashboard.php?page=config&action=update_prison_time" method="post" id="prison-time-form">
             <div class="prison-time-row">
                 <label for="prison-time" class="sr-only">Temps passé en prison :</label>
-                <input type="datetime-local" id="prison-time" name="prison-time" required>
+                <input type="time" id="prison-time" name="prison-time" required
+                    value="<?= isset($prisonTime) ? htmlspecialchars($prisonTime) : '' ?>" step="1">
             </div>
             <div class="prison-time-btn-row">
                 <button type="submit">Valider</button>

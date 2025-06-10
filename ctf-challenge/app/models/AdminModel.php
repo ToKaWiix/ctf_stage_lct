@@ -111,4 +111,16 @@ class AdminModel {
             'end' => $end
         ]);
     }
+
+    public function getPrisonTime() {
+        $sql = "SELECT ctf_prison_time FROM ctf_prison WHERE id_ctf_prison = 1";
+        $stmt = $this->pdo->query($sql);
+        return $stmt->fetchColumn();
+    }
+
+    public function updatePrisonTime($prisonTime) {
+        $sql = "UPDATE ctf_prison SET ctf_prison_time = :prison_time WHERE id_ctf_prison = 1";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['prison_time' => $prisonTime]);
+    }
 } 
