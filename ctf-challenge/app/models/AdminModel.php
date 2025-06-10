@@ -65,4 +65,34 @@ class AdminModel {
 
         return $isValid;
     }
+
+    /**
+     * Récupère tous les administrateurs.
+     * @return array Liste des administrateurs sous forme de tableaux associatifs.
+     */
+    public function getAllAdmins(): array {
+        $sql = "SELECT id_ctf_admin, ctf_username, ctf_password FROM ctf_admin";
+        try {
+            $stmt = $this->pdo->query($sql);
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            error_log("AdminModel::getAllAdmins - Erreur PDO: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function addAdmin($username, $hashedPassword) {
+        $sql = "INSERT INTO ctf_admin (ctf_username, ctf_password) VALUES (:username, :password)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'username' => $username,
+            'password' => $hashedPassword
+        ]);
+    }
+
+    public function deleteAdmin($adminId) {
+        $sql = "DELETE FROM ctf_admin WHERE id_ctf_admin = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['id' => $adminId]);
+    }
 } 
