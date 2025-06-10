@@ -104,4 +104,35 @@ class ConfigModel {
             return false;
         }
     }
+
+    /**
+     * Récupère le libellé du partenaire.
+     * @return string|false Le libellé du partenaire, ou false si non trouvé.
+     */
+    public function getPartnerText(): string|false {
+        $sql = "SELECT ctf_libelle_partenaire FROM ctf_partenaire WHERE id_ctf_partenaire = 1";
+        try {
+            $stmt = $this->pdo->query($sql);
+            return $stmt->fetchColumn();
+        } catch (\PDOException $e) {
+            error_log("ConfigModel::getPartnerText - Erreur PDO: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Met à jour le libellé du partenaire.
+     * @param string $libelle Le nouveau libellé du partenaire.
+     * @return bool True en cas de succès, false sinon.
+     */
+    public function updatePartnerText(string $libelle): bool {
+        $sql = "UPDATE ctf_partenaire SET ctf_libelle_partenaire = :libelle WHERE id_ctf_partenaire = 1";
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute(['libelle' => $libelle]);
+        } catch (\PDOException $e) {
+            error_log("ConfigModel::updatePartnerText - Erreur PDO: " . $e->getMessage());
+            return false;
+        }
+    }
 }

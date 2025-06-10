@@ -38,11 +38,16 @@ class ConfigController {
                 $this->updatePrisonTime();
                 return;
             }
+            if ($_GET['action'] === 'update_partner_text' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+                $this->updatePartnerText();
+                return;
+            }
         }
         
         $admins = $this->configModel->getAllAdmins();
         $ctfTime = $this->configModel->getCtfTime();
         $prisonTime = $this->configModel->getPrisonTime();
+        $partnerText = $this->configModel->getPartnerText();
         $view = dirname(__DIR__) . '/views/includes/admin/dashboard/config.php';
         $page = 'config';
         include dirname(__DIR__) . '/views/layouts/admin.php';
@@ -103,6 +108,19 @@ class ConfigController {
 
         $this->configModel->updatePrisonTime($prisonTime);
         header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=config&success=4');
+        exit;
+    }
+
+    public function updatePartnerText() {
+        $libelle = $_POST['partner_text'] ?? null;
+
+        if ($libelle === null) {
+            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=config&error=Champ partenaire manquant');
+            exit;
+        }
+
+        $this->configModel->updatePartnerText($libelle);
+        header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=config&success=5');
         exit;
     }
 } 

@@ -90,10 +90,10 @@
         <div id="partenaires-title">
             <h3>Partenaires</h3>
         </div>
-        <form action="/partenaires-bande.php" method="post" id="prison-time-form">
+        <form action="/ctf_anna/ctf-challenge/public/dashboard.php?page=config&action=update_partner_text" method="post" id="partenaires-form">
             <div class="partenaires-row">
-                <label for="partenaires" class="sr-only">Partenaires :</label>
-                <input type="longtext" id="partenaires" name="partenaires" required>
+                <label for="partner_text" class="sr-only">Partenaires :</label>
+                <input type="text" id="partner_text" name="partner_text" required value="<?= isset($partnerText) ? htmlspecialchars($partnerText) : '' ?>">
             </div>
             <div class="partenaires-btn-row">
                 <button type="submit">Valider</button>
