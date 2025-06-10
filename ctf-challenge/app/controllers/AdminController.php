@@ -5,6 +5,7 @@ require_once dirname(__DIR__) . '/models/TeamModel.php';
 require_once dirname(__DIR__) . '/models/PlayerModel.php';
 require_once dirname(__DIR__) . '/controllers/TeamController.php';
 require_once dirname(__DIR__) . '/controllers/PlayerController.php';
+require_once dirname(__DIR__) . '/controllers/ChallengeController.php';
 
 use Anna\CtfChallenge\Models\TeamModel;
 use Anna\CtfChallenge\Models\PlayerModel;
@@ -72,10 +73,23 @@ class AdminController {
                 $view = dirname(__DIR__) . '/views/includes/admin/dashboard/players.php';
                 break;
             case 'challenges':
-                // require_once dirname(__DIR__, 2) . '/app/core/database.php';
-                // $pdo = getPDO();
-                // $challengeModel = new ChallengeModel($pdo);
-                // $challenges = $challengeModel->getAll();
+                // Vérifier si c'est une action de suppression, d'ajout ou de modification
+                if (isset($_GET['action'])) {
+                    $controller = new ChallengeController($this->pdo);
+                    if ($_GET['action'] === 'delete' && isset($_GET['id'])) {
+                        $controller->deleteChallenge();
+                        return;
+                    } elseif ($_GET['action'] === 'add' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+                        $controller->addChallenge();
+                        return;
+                    } elseif ($_GET['action'] === 'edit' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+                        $controller->editChallenge();
+                        return;
+                    }
+                }
+                
+                $controller = new ChallengeController($this->pdo);
+                $controller->index();
                 $view = dirname(__DIR__) . '/views/includes/admin/dashboard/challenges.php';
                 break;
             case 'config':

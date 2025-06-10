@@ -200,8 +200,29 @@ main {
     width: 100%;
 }
 
+table {
+    width: 100%;
+    border-spacing: 0;
+    border-radius: 1rem;
+    overflow: hidden;
+    background-color: var(--color-bg-card);
+}
+
+th {
+    font-size: 1.5rem;
+    font-weight: medium;
+    background-color: var(--color-table-header);
+    color: white;
+}
+
 tbody tr td {
+    text-align: center;
     font-size: 1rem;
+}
+
+th, td {
+    border: 1px solid var(--color-table-border);
+    height: 3.8rem;
 }
 
 #actions-icons {
@@ -209,6 +230,15 @@ tbody tr td {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+}
+
+#actions-icons svg {
+    width: 26px !important;
+    height: 26px !important;
+}
+
+#actions-icons svg:hover path {
+    stroke-width: 5;
 }
 
 
