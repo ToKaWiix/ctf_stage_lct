@@ -141,8 +141,33 @@ table tbody tr:last-child td:last-child {
     
 }
 
+#player-card-one, #player-card-two {
+    width: 17.875rem;
+    height: 20.938rem;
+    border-radius: 1.563rem;
+    overflow: hidden;
+    position: relative;
+}
+
+#player-card-one::before, #player-card-two::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+#player-card-one > *, #player-card-two > * {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
 #player-card-one {
-    background-color: #AED6E2;
     margin-right: 0.188rem;
     display: flex;
     flex-direction: column;
@@ -150,15 +175,12 @@ table tbody tr:last-child td:last-child {
     justify-content: space-evenly;
 }
 
-#player-card-one-img {
-    width: 100%;
-    height: 100%;
+#player-card-two {
+    margin-right: 0.188rem;
     display: flex;
-}
-
-#player-card-one-team {
-    transform: rotate(270deg);
-    align-self: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 #card-team-img {
@@ -166,71 +188,49 @@ table tbody tr:last-child td:last-child {
     margin-left: 3rem;
     height: 100%;
     width: 100%;
+    position: relative;
+}
+
+#player-card-one-img, #player-card-two-img {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
 }
 
 #player-pic {
     width: 11.938rem;
     height: 14.5rem;
+    object-fit: cover;
     position: relative;
+    border: 2px solid white;
+    border-radius: 0.5rem;
 }
 
 #lct-pic {
     width: 5.438rem;
     height: 2rem;
     position: absolute;
-    align-self: end;
+    bottom: 0;
+    right: 0;
 }
 
-#player-card-one-team {
-    margin-left: -6rem;
-}
-
-#player-card-one-name, 
-#player-card-one-team,
-#player-card-one-pseudo {
-    font-size: 1.875rem;
-}
-
-#player-card-two {
-    background-color: #EDD7B1;
-    margin-right: 0.188rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-#player-card-two-team {
+#player-card-one-team, #player-card-two-team {
     transform: rotate(270deg);
     align-self: center;
-}
-
-#card-team-img {
-    display: flex;
-    margin-left: 3rem;
-    height: auto;
-}
-
-#player-card-two-img {
-    width: 100%;
-    height: 100%;
-    display: flex;
-}
-
-#player-card-two-team {
     margin-left: -6rem;
-}
-
-#player-card-two-name, 
-#player-card-two-team,
-#player-card-two-pseudo {
     font-size: 1.875rem;
 }
 
-#player-card-one, #player-card-two {
-    width: 17.875rem;
-    height: 20.938rem;
-    border-radius: 1.563rem;
+#player-card-one-name, #player-card-one-pseudo,
+#player-card-two-name, #player-card-two-pseudo {
+    font-size: 1.875rem;
+    text-align: center;
+    padding: 0 1rem;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 

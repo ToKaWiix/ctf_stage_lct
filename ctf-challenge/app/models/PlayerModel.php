@@ -10,9 +10,10 @@ class PlayerModel {
 
     public function getAll() {
         $stmt = $this->pdo->query("
-            SELECT j.*, e.ctf_nom_equipe 
+            SELECT j.*, e.ctf_nom_equipe, e.ctf_background_equipe 
             FROM ctf_joueur j 
-            RIGHT JOIN ctf_equipe e ON j.id_ctf_equipe = e.id_ctf_equipe
+            INNER JOIN ctf_equipe e ON j.id_ctf_equipe = e.id_ctf_equipe
+            WHERE j.id_ctf_equipe IS NOT NULL
             ORDER BY e.ctf_nom_equipe ASC, j.ctf_nom ASC, j.ctf_prenom ASC
         ");
         return $stmt->fetchAll();
