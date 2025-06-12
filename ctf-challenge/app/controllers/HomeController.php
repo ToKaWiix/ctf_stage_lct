@@ -2,6 +2,7 @@
 namespace Anna\CtfChallenge\Controllers;
 
 use Anna\CtfChallenge\Models\TeamModel;
+use Anna\CtfChallenge\Models\PartenaireModel;
 
 class HomeController
 {
@@ -14,12 +15,15 @@ class HomeController
     public function index()
     {
         try {
-            // Récupérer les données avant de charger la vue
-            $model = new TeamModel($this->pdo);
-            $teams = $model->getAllSortedByScore();
-            
-            // Définir la variable globale
+            // Récupérer les données des équipes
+            $teamModel = new TeamModel($this->pdo);
+            $teams = $teamModel->getAllSortedByScore();
             $GLOBALS['teams'] = $teams;
+
+            // Récupérer les données des partenaires
+            $partenaireModel = new PartenaireModel($this->pdo);
+            $partenaires = $partenaireModel->getAll();
+            $GLOBALS['partenaires'] = $partenaires;
             
             // Charger la vue
             require_once __DIR__ . '/../views/scoreboard.php';
