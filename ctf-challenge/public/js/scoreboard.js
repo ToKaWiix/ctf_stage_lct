@@ -143,4 +143,33 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mettre à jour le timer toutes les secondes
     updateTimer();
     countdownInterval = setInterval(updateTimer, 1000);
+
+
+
+    
+    // Animation du texte des partenaires
+    function animatePartenaire() {
+        const partenaireText = document.querySelector('#red-partenaires h3');
+        if (!partenaireText) return;
+
+        const container = document.querySelector('#red-partenaires');
+        const textWidth = partenaireText.offsetWidth;
+        const containerWidth = container.offsetWidth;
+        
+        let position = containerWidth;
+        
+        function animate() {
+            position -= 1; // Vitesse de défilement
+            if (position < -textWidth) {
+                position = containerWidth;
+            }
+            partenaireText.style.transform = `translateX(${position}px)`;
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+    }
+
+    // Démarrer l'animation quand le DOM est chargé
+    animatePartenaire();
 }); 

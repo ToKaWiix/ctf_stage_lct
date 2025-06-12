@@ -104,17 +104,21 @@ table tbody tr:last-child td:last-child {
 /* BANDE PARTENAIRES */
 
 #red-partenaires {
-    background-color: var(--color-primary);;
+    background-color: var(--color-primary);
     margin-top: 0.563rem;
     height: 3.438rem;
-    grid-column: 1 / 24;
+    grid-column: 1 / 25;
+    overflow: hidden;
+    position: relative;
 }
 
 #red-partenaires h3 {
     color: white;
     font-size: 1.875rem;
-    text-align: center;
     padding: 0.625rem 0;
+    position: absolute;
+    white-space: nowrap;
+    width: fit-content;
 }
 
 
