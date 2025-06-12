@@ -101,14 +101,26 @@ class SubmitController {
         if ($isCorrect) {
             // Enregistrer le score pour l'équipe
             if ($this->submitModel->recordScore($player['id_ctf_equipe'], $challengeId)) {
-                // Mettre à jour le score total de l'équipe
-                $this->submitModel->updateTeamScore($player['id_ctf_equipe'], $challengeId);
-                $_SESSION['success'] = "Flag correct ! Points ajoutés à votre équipe.";
+                // Vérifier si les points sont visibles
+                $stmt = $this->pdo->prepare("SELECT ctf_show_pts FROM ctf_challenge WHERE id_ctf_challenge = :challenge_id");
+                $stmt->execute(['challenge_id' => $challengeId]);
+                $challenge = $stmt->fetch();
+
+                if ($challenge && $challenge['ctf_show_pts'] == 1) {
+                    // Mettre à jour le score total de l'équipe
+                    $this->submitModel->updateTeamScore($player['id_ctf_equipe'], $challengeId);
+                    $_SESSION['success'] = "Flag correct ! Points ajoutés à votre équipe.";
+                } else {
+                    $_SESSION['success'] = "Flag correct ! Les points seront attribués ultérieurement.";
+                }
             } else {
                 $_SESSION['error'] = "Votre équipe a déjà résolu ce challenge";
             }
         } else {
-            $_SESSION['error'] = "Flag incorrect";
+            // Mettre le joueur en prison
+            $stmt = $this->pdo->prepare("UPDATE ctf_joueur SET ctf_prison = 1 WHERE id_ctf_joueur = :player_id");
+            $stmt->execute(['player_id' => $player['id_ctf_joueur']]);
+            $_SESSION['error'] = "Flag incorrect ! Vous êtes maintenant en prison.";
         }
 
         header('Location: /ctf_anna/ctf-challenge/public/submit.php');

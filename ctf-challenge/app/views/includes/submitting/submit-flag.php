@@ -67,7 +67,7 @@ unset($_SESSION['error']);
             }
         } else {
             modalTitle.textContent = 'Challenge échoué';
-            modalMessage.innerHTML = '🔴 ' + message;
+            modalMessage.innerHTML = '⛓️ ' + message;
         }
         
         modal.style.display = 'block';
