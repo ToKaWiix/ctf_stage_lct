@@ -36,13 +36,13 @@ nav {
 /* FORMULAIRE DE SOUMISSION */
 
 main {
-        grid-column: 1 / 25;
-        grid-row: 4 / 25;
-        display: grid;
-        grid-template-columns: repeat(24, 1fr);
-        grid-template-rows: repeat(24, 1fr);
-        height: 100%;
-        margin: 0 3.125rem 0 3.125rem;
+    grid-column: 1 / 25;
+    grid-row: 4 / 25;
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    grid-template-rows: repeat(24, 1fr);
+    height: 100%;
+    margin: 0 3.125rem 0 3.125rem;
 }
 
 #form-submit-flag {
@@ -65,13 +65,33 @@ main {
     grid-row: 2 / 3;
 }
 
+.error-message, .success-message {
+    grid-column: 2 / 14;
+    grid-row: 3 / 4;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.error-message {
+    background-color: var(--color-action-red);
+    color: white;
+}
+
+.success-message {
+    background-color: var(--color-primary);
+    color: white;
+}
+
 form {
     display: flex;
     flex-direction: column;
     color: white;
     font-size: 1.563rem;
     grid-column: 2 / 14;
-    grid-row: 3 / 14;
+    grid-row: 4 / 14;
 }
 
 form input, select {
@@ -92,12 +112,13 @@ form p{
 
 #submit-flag-button {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);}
+    grid-template-columns: repeat(12, 1fr);
+}
 
 form button {
     margin-top: 3rem;
     height: 5rem;
-    background-color: var(--color-primary);;
+    background-color: var(--color-primary);
     border-radius: 1.188rem;
     grid-column: 2 / 12;
     color: white;
