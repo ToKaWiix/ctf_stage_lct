@@ -43,13 +43,37 @@ class ScoreboardController {
     }
 
     public function getChallengesForScoreboard() {
-        $challengesPerPage = 5;
-        $currentIndex = isset($_SESSION['challenge_index']) ? $_SESSION['challenge_index'] : 0;
+        // Démarrer la session si elle n'est pas déjà démarrée
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Initialiser la session si elle n'existe pas
+        if (!isset($_SESSION['challenge_index'])) {
+            $_SESSION['challenge_index'] = 0;
+            $_SESSION['last_rotation'] = time();
+        }
+
+        // Vérifier si 5 secondes se sont écoulées depuis la dernière rotation
+        $currentTime = time();
+        if ($currentTime - $_SESSION['last_rotation'] >= 5) {
+            // Incrémenter l'index de 5 pour passer au groupe suivant
+            $_SESSION['challenge_index'] += 5;
+            $_SESSION['last_rotation'] = $currentTime;
+            
+            // Log pour le débogage
+            error_log("Rotation des challenges - Nouvel index: " . $_SESSION['challenge_index']);
+            error_log("Temps actuel: " . $currentTime . ", Dernière rotation: " . $_SESSION['last_rotation']);
+        }
+
+        // Récupérer les challenges
+        $challenges = $this->challengeModel->getChallengesForScoreboard($_SESSION['challenge_index'], 5);
         
-        // Mettre à jour l'index pour la prochaine actualisation
-        $_SESSION['challenge_index'] = ($currentIndex + $challengesPerPage) % count($this->challengeModel->getAll());
+        // Log pour le débogage
+        error_log("Index actuel: " . $_SESSION['challenge_index']);
+        error_log("Challenges récupérés: " . print_r($challenges, true));
         
-        return $this->challengeModel->getChallengesForScoreboard($currentIndex, $challengesPerPage);
+        return $challenges;
     }
 
     public function getPlayersForScoreboard() {

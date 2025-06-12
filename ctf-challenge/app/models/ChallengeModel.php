@@ -17,18 +17,37 @@ class ChallengeModel {
     }
 
     public function getChallengesForScoreboard($currentIndex = 0, $challengesPerPage = 5) {
+        // Récupérer tous les challenges
         $allChallenges = $this->getAll();
         $totalChallenges = count($allChallenges);
-        
-        // Sélectionner les challenges à afficher
-        $displayedChallenges = array_slice($allChallenges, $currentIndex, $challengesPerPage);
-        
-        // Si on n'a pas assez de challenges, on prend depuis le début
-        if (count($displayedChallenges) < $challengesPerPage) {
-            $remaining = $challengesPerPage - count($displayedChallenges);
-            $displayedChallenges = array_merge($displayedChallenges, array_slice($allChallenges, 0, $remaining));
+
+        if ($totalChallenges === 0) {
+            return [];
         }
+
+        // Log pour le débogage
+        error_log("Nombre total de challenges: " . $totalChallenges);
+        error_log("Index reçu: " . $currentIndex);
+
+        // Calculer le groupe actuel (chaque groupe contient 5 challenges)
+        $groupIndex = floor($currentIndex / $challengesPerPage);
+        $startIndex = $groupIndex * $challengesPerPage;
+
+        // Sélectionner les challenges à afficher
+        $displayedChallenges = [];
         
+        // Prendre les 5 challenges suivants
+        for ($i = 0; $i < $challengesPerPage; $i++) {
+            $index = ($startIndex + $i) % $totalChallenges;
+            if (isset($allChallenges[$index])) {
+                $displayedChallenges[] = $allChallenges[$index];
+            }
+        }
+
+        // Log pour le débogage
+        error_log("Index de début: " . $startIndex);
+        error_log("Nombre de challenges affichés: " . count($displayedChallenges));
+
         return $displayedChallenges;
     }
 
