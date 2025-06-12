@@ -130,3 +130,83 @@ form button:hover {
     background-color: var(--color-primary-dark);
     cursor: pointer;
 }
+
+/* Styles pour la modale */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: var(--color-table-header);
+    margin: 15% auto;
+    padding: 2rem;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 1.563rem;
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.modal-title {
+    margin: 0;
+    color: white;
+    font-size: 1.875rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.close {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.close:hover {
+    color: var(--color-primary);
+}
+
+.modal-body {
+    margin-bottom: 1.5rem;
+}
+
+.modal-message {
+    color: white;
+    font-size: 1.563rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.modal-footer {
+    text-align: center;
+}
+
+.modal-button {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 1.188rem;
+    cursor: pointer;
+    font-size: 1.875rem;
+    width: 100%;
+}
+
+.modal-button:hover {
+    background-color: var(--color-primary-dark);
+}
