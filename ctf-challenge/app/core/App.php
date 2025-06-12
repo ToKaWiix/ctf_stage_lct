@@ -1,6 +1,8 @@
 <?php
 namespace Anna\CtfChallenge\Core;
 
+require_once dirname(__DIR__) . '/core/database.php';
+
 class App
 {
     public function run()
@@ -13,7 +15,11 @@ class App
         $controllerClass = 'Anna\\CtfChallenge\\Controllers\\' . ucfirst($controllerName) . 'Controller';
 
         if (class_exists($controllerClass)) {
-            $controller = new $controllerClass();
+            // Obtenir la connexion PDO
+            $pdo = getPDO();
+            
+            // Instancier le contrôleur avec la connexion PDO
+            $controller = new $controllerClass($pdo);
 
             if (method_exists($controller, $action)) {
                 $controller->$action();
