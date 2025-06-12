@@ -193,7 +193,7 @@ table tbody tr:last-child td:last-child {
 
 #player-card-one-img, #player-card-two-img {
     width: 100%;
-    height: 100%;
+    height: 83%;
     display: flex;
     position: relative;
 }
@@ -202,7 +202,7 @@ table tbody tr:last-child td:last-child {
     width: 11.938rem;
     height: 14.5rem;
     object-fit: cover;
-    position: relative;
+    position: absolute;
     border: 2px solid white;
     border-radius: 0.5rem;
 }
@@ -210,9 +210,8 @@ table tbody tr:last-child td:last-child {
 #lct-pic {
     width: 5.438rem;
     height: 2rem;
-    position: absolute;
-    bottom: 0;
-    right: 0;
+    position: relative;
+    margin-top: 12.5rem;
 }
 
 #player-card-one-team, #player-card-two-team {
