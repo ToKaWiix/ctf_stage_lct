@@ -21,7 +21,7 @@
             <td>🟣</td>
             <td>🔴</td>
             <td>3</td>
-            <td>650</td>
+            <td><?php echo htmlspecialchars($team['ctf_score_total']); ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>
