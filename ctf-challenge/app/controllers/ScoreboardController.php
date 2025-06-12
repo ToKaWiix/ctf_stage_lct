@@ -1,14 +1,22 @@
 <?php
 namespace Anna\CtfChallenge\Controllers;
 
+require_once dirname(__DIR__) . '/models/ChallengeModel.php';
+require_once dirname(__DIR__) . '/models/PlayerModel.php';
+
+use Anna\CtfChallenge\Models\ChallengeModel;
 use Anna\CtfChallenge\Models\PlayerModel;
 use Anna\CtfChallenge\Models\TeamModel;
 
 class ScoreboardController {
     private $pdo;
+    private $challengeModel;
+    private $teamModel;
 
     public function __construct($pdo) {
         $this->pdo = $pdo;
+        $this->challengeModel = new ChallengeModel($pdo);
+        $this->teamModel = new TeamModel($pdo);
         error_log("ScoreboardController initialisé avec PDO");
     }
 
@@ -32,6 +40,16 @@ class ScoreboardController {
             error_log("Erreur dans ScoreboardController : " . $e->getMessage());
             throw $e;
         }
+    }
+
+    public function getChallengesForScoreboard() {
+        $challengesPerPage = 5;
+        $currentIndex = isset($_SESSION['challenge_index']) ? $_SESSION['challenge_index'] : 0;
+        
+        // Mettre à jour l'index pour la prochaine actualisation
+        $_SESSION['challenge_index'] = ($currentIndex + $challengesPerPage) % count($this->challengeModel->getAll());
+        
+        return $this->challengeModel->getChallengesForScoreboard($currentIndex, $challengesPerPage);
     }
 
     public function getPlayersForScoreboard() {

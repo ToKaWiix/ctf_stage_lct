@@ -16,6 +16,22 @@ class ChallengeModel {
         return $stmt->fetchAll();
     }
 
+    public function getChallengesForScoreboard($currentIndex = 0, $challengesPerPage = 5) {
+        $allChallenges = $this->getAll();
+        $totalChallenges = count($allChallenges);
+        
+        // Sélectionner les challenges à afficher
+        $displayedChallenges = array_slice($allChallenges, $currentIndex, $challengesPerPage);
+        
+        // Si on n'a pas assez de challenges, on prend depuis le début
+        if (count($displayedChallenges) < $challengesPerPage) {
+            $remaining = $challengesPerPage - count($displayedChallenges);
+            $displayedChallenges = array_merge($displayedChallenges, array_slice($allChallenges, 0, $remaining));
+        }
+        
+        return $displayedChallenges;
+    }
+
     public function add($data) {
         $stmt = $this->pdo->prepare("
             INSERT INTO ctf_challenge (ctf_nom_challenge, ctf_pts, ctf_flag, ctf_show_pts) 

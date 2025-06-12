@@ -174,4 +174,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Démarrer l'animation quand le DOM est chargé
     animatePartenaire();
+
+    // Gestion de la rotation des challenges
+    let currentChallengeIndex = 0;
+    const challengesPerPage = 5;
+
+    function updateChallengeHeaders() {
+        const headers = document.querySelectorAll('th:nth-child(n+2):nth-child(-n+6)');
+        const challenges = window.challenges || [];
+        
+        headers.forEach((header, index) => {
+            const challengeIndex = (currentChallengeIndex + index) % challenges.length;
+            const challenge = challenges[challengeIndex];
+            if (challenge) {
+                header.textContent = challenge.ctf_nom_challenge;
+                // Ajuster la taille de la police si le texte est trop long
+                if (challenge.ctf_nom_challenge.length > 15) {
+                    header.style.fontSize = '1.2rem';
+                } else {
+                    header.style.fontSize = '1.563rem';
+                }
+            }
+        });
+    }
+
+    // Initialiser la rotation des challenges
+    updateChallengeHeaders();
 }); 
