@@ -144,9 +144,11 @@ document.addEventListener('DOMContentLoaded', function() {
     updateTimer();
     countdownInterval = setInterval(updateTimer, 1000);
 
+    // Rafraîchir la page toutes les 30 secondes
+    setTimeout(function() {
+        window.location.reload();
+    }, 30000);
 
-
-    
     // Animation du texte des partenaires
     function animatePartenaire() {
         const partenaireText = document.querySelector('#red-partenaires h3');
