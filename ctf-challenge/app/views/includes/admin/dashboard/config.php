@@ -104,9 +104,11 @@
         <div id="give-pts-title">
             <h3>Attribuer les points</h3>
         </div>
-        <div class="give-pts-btn-row">
-            <button type="submit">Valider</button>
-        </div>
+        <form action="/ctf_anna/ctf-challenge/public/dashboard.php?page=config&action=distribute_points" method="post" id="give-pts-form">
+            <div class="give-pts-btn-row">
+                <button type="submit">Valider</button>
+            </div>
+        </form>
     </div>
 </div>
 
