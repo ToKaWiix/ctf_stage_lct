@@ -48,46 +48,57 @@ foreach ($prisonPlayers as $player) {
 </div>
 
 <script>
-function updateTimer(playerId, prisonTime, startTime) {
-    const timerElement = document.querySelector(`[data-player-id="${playerId}"] .prison-timer`);
-    if (!timerElement) return;
-
-    const now = new Date();
-    const start = new Date(startTime);
-    const timeSpent = Math.floor((now - start) / 1000); // Convertir en secondes
-    const remainingTime = Math.max(0, prisonTime - timeSpent);
+function updatePrisonTimers() {
+    const prisonPlayers = document.querySelectorAll('.prison-player');
     
-    if (remainingTime <= 0) {
-        timerElement.textContent = '00:00';
-        releasePlayer(playerId);
-        return;
-    }
-
-    const minutes = Math.floor(remainingTime / 60);
-    const seconds = remainingTime % 60;
-    timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-    setTimeout(() => {
-        updateTimer(playerId, prisonTime, startTime);
-    }, 1000);
-}
-
-function releasePlayer(playerId) {
-    fetch('/ctf_anna/ctf-challenge/public/api/release-prisoner.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ player_id: playerId })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            location.reload();
+    prisonPlayers.forEach(player => {
+        const timerElement = player.querySelector('.prison-timer');
+        const playerId = player.dataset.playerId;
+        const prisonTime = parseInt(player.dataset.prisonTime) || 0;
+        const timeSpent = parseInt(player.dataset.timeSpent) || 0;
+        
+        // Calculer le temps restant
+        const remainingTime = Math.max(0, prisonTime - timeSpent);
+        
+        // Si le temps est écoulé, libérer le joueur
+        if (remainingTime <= 0) {
+            // Appeler l'API pour libérer le joueur
+            fetch('/ctf_anna/ctf-challenge/public/api/release-prisoner.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ player_id: playerId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Supprimer la carte du joueur
+                    player.remove();
+                    
+                    // Si c'était le dernier joueur, rafraîchir la page
+                    const remainingPlayers = document.querySelectorAll('.prison-player');
+                    if (remainingPlayers.length === 0) {
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1000);
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Erreur lors de la libération du joueur:', error);
+            });
+            
+            return;
         }
-    })
-    .catch(error => {
-        console.error('Error releasing player:', error);
+        
+        // Mettre à jour l'affichage du timer
+        const minutes = Math.floor(remainingTime / 60);
+        const seconds = remainingTime % 60;
+        timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        
+        // Mettre à jour le temps passé
+        player.dataset.timeSpent = timeSpent + 1;
     });
 }
 
@@ -97,6 +108,13 @@ document.querySelectorAll('.prison-player').forEach(player => {
     const prisonTime = parseInt(player.dataset.prisonTime);
     const startTime = player.dataset.startTime;
     
-    updateTimer(playerId, prisonTime, startTime);
+    // Initialiser le temps passé à partir du temps déjà écoulé
+    player.dataset.timeSpent = Math.floor((new Date() - new Date(startTime)) / 1000);
 });
+
+// Mettre à jour les timers toutes les secondes
+setInterval(updatePrisonTimers, 1000);
+
+// Mettre à jour immédiatement au chargement
+updatePrisonTimers();
 </script>
