@@ -2,7 +2,7 @@
     "name": "anna/ctf-challenge",
     "autoload": {
         "psr-4": {
-            "Anna\\CtfChallenge\\": "app/"
+            "App\\": "app/"
         }
     },
     "authors": [

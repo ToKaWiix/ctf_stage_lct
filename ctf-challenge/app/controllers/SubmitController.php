@@ -1,5 +1,7 @@
 <?php
-namespace Anna\CtfChallenge\Controllers;
+namespace App\Controllers;
+
+require_once dirname(__DIR__) . '/core/config.php';
 
 class SubmitController {
     private $pdo;
@@ -7,7 +9,7 @@ class SubmitController {
 
     public function __construct($pdo) {
         $this->pdo = $pdo;
-        $this->submitModel = new \Anna\CtfChallenge\Models\SubmitModel($pdo);
+        $this->submitModel = new \App\Models\SubmitModel($pdo);
     }
 
     public function index() {

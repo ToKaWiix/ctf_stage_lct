@@ -10,7 +10,7 @@ error_log("Fichiers requis chargés");
 $pdo = getPDO();
 error_log("Connexion PDO établie");
 
-$controller = new \Anna\CtfChallenge\Controllers\ChallengeController($pdo);
+$controller = new \App\Controllers\ChallengeController($pdo);
 error_log("Controller instancié");
 
 if (isset($_GET['action'])) {

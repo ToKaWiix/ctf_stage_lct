@@ -1,14 +1,14 @@
 <?php
-namespace Anna\CtfChallenge\Controllers;
+namespace App\Controllers;
 
 require_once dirname(__DIR__) . '/models/ChallengeModel.php';
 require_once dirname(__DIR__) . '/models/PlayerModel.php';
 
-use Anna\CtfChallenge\Models\ChallengeModel;
-use Anna\CtfChallenge\Models\PlayerModel;
-use Anna\CtfChallenge\Models\TeamModel;
+use App\Models\ChallengeModel;
+use App\Models\PlayerModel;
+use App\Models\TeamModel;
 
-if (!class_exists('Anna\CtfChallenge\Controllers\ScoreboardController')) {
+if (!class_exists('App\Controllers\ScoreboardController')) {
     class ScoreboardController {
         private $pdo;
         private $challengeModel;

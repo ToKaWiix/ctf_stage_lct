@@ -1,5 +1,5 @@
 <?php
-namespace Anna\CtfChallenge\Core;
+namespace App\Core;
 
 require_once dirname(__DIR__) . '/core/database.php';
 
@@ -12,7 +12,7 @@ class App
         $action = $_GET['action'] ?? 'index';
 
         // Génère le nom complet de la classe contrôleur
-        $controllerClass = 'Anna\\CtfChallenge\\Controllers\\' . ucfirst($controllerName) . 'Controller';
+        $controllerClass = 'App\\Controllers\\' . ucfirst($controllerName) . 'Controller';
 
         if (class_exists($controllerClass)) {
             // Obtenir la connexion PDO

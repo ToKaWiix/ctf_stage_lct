@@ -1,5 +1,5 @@
 <?php
-namespace Anna\CtfChallenge\Models;
+namespace App\Models;
 
 class SubmitModel {
     private $pdo;

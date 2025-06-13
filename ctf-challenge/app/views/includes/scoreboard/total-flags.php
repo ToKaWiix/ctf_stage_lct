@@ -2,7 +2,7 @@
 require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/app/core/database.php';
 
 $pdo = getPDO();
-$controller = new \Anna\CtfChallenge\Controllers\ScoreboardController($pdo);
+$controller = new \App\Controllers\ScoreboardController($pdo);
 $totalFlags = $controller->getTotalSolvedChallenges();
 ?>
 

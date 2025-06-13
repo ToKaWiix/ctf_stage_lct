@@ -1,5 +1,5 @@
 <?php
-namespace Anna\CtfChallenge\Controllers;
+namespace App\Controllers;
 
 require_once dirname(__DIR__) . '/models/TeamModel.php';
 require_once dirname(__DIR__) . '/models/PlayerModel.php';
@@ -8,9 +8,9 @@ require_once dirname(__DIR__) . '/controllers/TeamController.php';
 require_once dirname(__DIR__) . '/controllers/PlayerController.php';
 require_once dirname(__DIR__) . '/controllers/ChallengeController.php';
 
-use Anna\CtfChallenge\Models\TeamModel;
-use Anna\CtfChallenge\Models\PlayerModel;
-use Anna\CtfChallenge\Models\AdminModel;
+use App\Models\TeamModel;
+use App\Models\PlayerModel;
+use App\Models\AdminModel;
 
 class AdminController {
     private $pdo;
@@ -101,7 +101,7 @@ class AdminController {
     }
 
     public function home() {
-        $teamModel = new \Anna\CtfChallenge\Models\TeamModel($this->pdo);
+        $teamModel = new \App\Models\TeamModel($this->pdo);
         $teams = $teamModel->getAllSortedByScore();
         $teamCount = $teamModel->getTeamCount();
         require dirname(__DIR__) . '/views/includes/admin/dashboard/homeAdmin.php';

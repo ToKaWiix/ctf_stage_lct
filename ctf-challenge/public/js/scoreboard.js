@@ -144,11 +144,6 @@ document.addEventListener('DOMContentLoaded', function() {
     updateTimer();
     countdownInterval = setInterval(updateTimer, 1000);
 
-    // Rafraîchir la page toutes les 5 secondes
-    setInterval(function() {
-        window.location.reload();
-    }, 5000);
-
     // Animation du texte des partenaires
     function animatePartenaire() {
         const partenaireText = document.querySelector('#red-partenaires h3');
@@ -158,7 +153,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const textWidth = partenaireText.offsetWidth;
         const containerWidth = container.offsetWidth;
         
-        let position = containerWidth;
+        // Récupérer la position actuelle du localStorage ou utiliser la largeur du conteneur
+        let position = parseFloat(localStorage.getItem('partenairePosition')) || containerWidth;
         
         function animate() {
             position -= 1; // Vitesse de défilement
@@ -166,6 +162,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 position = containerWidth;
             }
             partenaireText.style.transform = `translateX(${position}px)`;
+            // Sauvegarder la position actuelle
+            localStorage.setItem('partenairePosition', position);
             requestAnimationFrame(animate);
         }
         
@@ -200,4 +198,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialiser la rotation des challenges
     updateChallengeHeaders();
+
+    // Rafraîchir la page toutes les 5 secondes sans réinitialiser l'animation
+    setInterval(function() {
+        // Sauvegarder l'état actuel
+        const currentState = {
+            position: parseFloat(localStorage.getItem('partenairePosition')),
+            challenges: window.challenges
+        };
+        
+        // Rafraîchir la page
+        window.location.reload();
+    }, 5000);
 }); 

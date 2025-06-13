@@ -6,8 +6,8 @@ require_once dirname(__DIR__) . '/app/controllers/AdminController.php';
 require_once dirname(__DIR__) . '/app/controllers/ConfigController.php';
 require_once dirname(__DIR__) . '/app/controllers/PointsController.php';
 
-use Anna\CtfChallenge\Controllers\AdminController;
-use Anna\CtfChallenge\Controllers\PointsController;
+use App\Controllers\AdminController;
+use App\Controllers\PointsController;
 
 // Démarrer la session si ce n'est pas déjà fait
 if (session_status() === PHP_SESSION_NONE) {
@@ -29,7 +29,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'distribute_points') {
 $page = $_GET['page'] ?? 'homeAdmin';
 
 if ($page === 'config') {
-    $controller = new \Anna\CtfChallenge\Controllers\ConfigController($pdo);
+    $controller = new \App\Controllers\ConfigController($pdo);
 } else {
     $controller = new AdminController($pdo);
 }

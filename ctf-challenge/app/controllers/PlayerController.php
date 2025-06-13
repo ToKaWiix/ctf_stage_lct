@@ -1,8 +1,8 @@
 <?php
-namespace Anna\CtfChallenge\Controllers;
+namespace App\Controllers;
 
-use Anna\CtfChallenge\Models\TeamModel;
-use Anna\CtfChallenge\Models\PlayerModel;
+use App\Models\TeamModel;
+use App\Models\PlayerModel;
 
 class PlayerController {
     private $pdo;

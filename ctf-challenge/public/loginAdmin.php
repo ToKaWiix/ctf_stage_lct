@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         try {
             $pdo = getPDO();
-            $authController = new \Anna\CtfChallenge\Controllers\AuthController($pdo);
+            $authController = new \App\Controllers\AuthController($pdo);
 
             // Tenter la connexion
             error_log("loginAdmin.php - Tentative de connexion pour: " . $username);

@@ -1,5 +1,5 @@
 <?php
-namespace Anna\CtfChallenge\Controllers;
+namespace App\Controllers;
 
 class PointsController {
     private $pdo;

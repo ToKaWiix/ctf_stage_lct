@@ -1,7 +1,7 @@
 <?php
-namespace Anna\CtfChallenge\Controllers;
+namespace App\Controllers;
 
-use Anna\CtfChallenge\Models\AdminModel;
+use App\Models\AdminModel;
 
 class AuthController {
     private $pdo;

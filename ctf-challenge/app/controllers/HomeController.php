@@ -1,8 +1,8 @@
 <?php
-namespace Anna\CtfChallenge\Controllers;
+namespace App\Controllers;
 
-use Anna\CtfChallenge\Models\TeamModel;
-use Anna\CtfChallenge\Models\PartenaireModel;
+use App\Models\TeamModel;
+use App\Models\PartenaireModel;
 
 class HomeController
 {

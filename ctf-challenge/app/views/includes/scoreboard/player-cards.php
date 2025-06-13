@@ -3,7 +3,7 @@ require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/app/core/database.p
 require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/app/controllers/ScoreboardController.php';
 
 $pdo = getPDO();
-$controller = new \Anna\CtfChallenge\Controllers\ScoreboardController($pdo);
+$controller = new \App\Controllers\ScoreboardController($pdo);
 $players = $controller->getPlayersForScoreboard();
 
 // N'afficher les cartes que si nous avons des joueurs avec des équipes

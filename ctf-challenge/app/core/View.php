@@ -1,5 +1,5 @@
 <?php
-namespace Anna\CtfChallenge\Core;
+namespace App\Core;
 
 class View {
     private $data = [];

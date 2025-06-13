@@ -1,9 +1,9 @@
 <?php
-namespace Anna\CtfChallenge\Controllers;
+namespace App\Controllers;
 
 require_once dirname(__DIR__) . '/models/ConfigModel.php';
 
-use Anna\CtfChallenge\Models\ConfigModel;
+use App\Models\ConfigModel;
 
 class ConfigController {
     private $pdo;

@@ -2,7 +2,7 @@
 require_once dirname(__DIR__, 2) . '/app/core/database.php';
 require_once dirname(__DIR__, 2) . '/app/models/ConfigModel.php';
 
-use Anna\CtfChallenge\Models\ConfigModel;
+use App\Models\ConfigModel;
 
 header('Content-Type: application/json');
 
