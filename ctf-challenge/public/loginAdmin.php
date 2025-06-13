@@ -62,63 +62,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     error_log("loginAdmin.php - Pas de soumission de formulaire ou méthode non POST");
 }
 
-// --- La div d'erreur est maintenant toujours générée, sa visibilité est contrôlée par JS ---
-
 // Inclure le header
 include dirname(__DIR__) . '/app/views/includes/admin/login/headerAdmin.php';
-
 ?>
 
 <main>
-    <div id="login-page">
-        <div id="login-form">
-            <div class="logo-lct">
-                <img src="/ctf_anna/ctf-challenge/public/images/LCT-03.png" alt="Logo LCT">
-            </div>
-            <div id="card-login">
-                <h2>connexion<br>administrateur</h2>
-                <form method="post">
-                    <label for="username">Identifiant :</label>
-                    <input type="text" id="username" name="username" required>
-
-                    <label for="password">Mot de passe :</label>
-                    <input type="password" id="password" name="password" required>
-                    <div id="submit-login-button">
-                        <button type="submit">Connexion</button>
-                    </div>
-                </form>
-                <?php if (!empty($error)): ?>
-                    <div class="error-message" style="text-align: center; color: red; margin-top: 10px;">
-                        <?= htmlspecialchars($error) ?>
-                    </div>
-                <?php endif; ?>
-            </div>
-        </div>
-    </div>
+    <?php include dirname(__DIR__) . '/app/views/includes/admin/login/loginform.php'; ?>
 </main>
 
-<script>
-// Script pour contrôler la visibilité du message d'erreur
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("Script JS pour l'erreur exécuté !");
-    const errorMessageDiv = document.querySelector('.error-message');
-
-    if (errorMessageDiv) {
-        const content = errorMessageDiv.textContent.trim();
-        console.log("Contenu brut de la div d'erreur : '" + content + "'");
-        console.log("Longueur du contenu trimé : " + content.length);
-
-        // Vérifie si la div existe et si elle contient du texte (pas juste des espaces blancs)
-        if (content.length > 0) {
-            console.log("Contenu détecté, affiche la div.");
-            errorMessageDiv.style.display = 'block'; // Rend la div visible
-        } else {
-            console.log("Aucun contenu détecté, cache la div.");
-            errorMessageDiv.style.display = 'none'; // Cache la div si elle est vide
-        }
-    }
-});
-</script>
+<!-- Inclure le script de protection -->
+<script src="/ctf_anna/ctf-challenge/public/js/login-protection.js"></script>
 
 </body>
 </html> 
