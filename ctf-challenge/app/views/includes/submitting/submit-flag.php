@@ -78,16 +78,21 @@ if ($config) {
     </form>
 </div>
 
+<!-- Charger le script JavaScript avant d'utiliser showModal -->
+<script src="/ctf_anna/ctf-challenge/public/js/submit-flag.js"></script>
+
 <?php if ($successMessage): ?>
     <script>
-        showModal('Succès', '<?php echo addslashes($successMessage); ?>');
+        document.addEventListener('DOMContentLoaded', function() {
+            showModal('Succès', '<?php echo addslashes($successMessage); ?>');
+        });
     </script>
 <?php endif; ?>
 
 <?php if ($errorMessage): ?>
     <script>
-        showModal('Erreur', '<?php echo addslashes($errorMessage); ?>');
+        document.addEventListener('DOMContentLoaded', function() {
+            showModal('Erreur', '<?php echo addslashes($errorMessage); ?>');
+        });
     </script>
 <?php endif; ?>
-
-<script src="/ctf_anna/ctf-challenge/public/js/submit-flag.js"></script>

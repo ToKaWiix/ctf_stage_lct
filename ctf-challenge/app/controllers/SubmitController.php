@@ -17,43 +17,16 @@ class SubmitController {
         require_once dirname(__DIR__) . '/views/submitting.php';
     }
 
-    private function isCTFActive() {
-        $stmt = $this->pdo->prepare("
-            SELECT ctf_start_time, ctf_end_time 
-            FROM ctf_config 
-            WHERE id_ctf_config = 1
-        ");
-        $stmt->execute();
-        $config = $stmt->fetch();
-
-        if (!$config) {
-            return false;
-        }
-
-        $now = new \DateTime();
-        $startTime = new \DateTime($config['ctf_start_time']);
-        $endTime = new \DateTime($config['ctf_end_time']);
-
-        return $now >= $startTime && $now <= $endTime;
-    }
-
     public function submit() {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: /ctf_anna/ctf-challenge/public/submit.php');
-            exit;
-        }
-
-        // Vérifier si le CTF est en cours
-        if (!$this->isCTFActive()) {
-            $_SESSION['error'] = "Le CTF n'est pas en cours. Vous ne pouvez pas soumettre de flag pour le moment.";
-            header('Location: /ctf_anna/ctf-challenge/public/submit.php');
+            header('Location: submit.php');
             exit;
         }
 
         // Vérifier que tous les champs sont remplis
         if (empty($_POST['pseudo']) || empty($_POST['challenge_id']) || empty($_POST['flag'])) {
             $_SESSION['error'] = "Tous les champs sont requis";
-            header('Location: /ctf_anna/ctf-challenge/public/submit.php');
+            header('Location: submit.php');
             exit;
         }
 
@@ -64,14 +37,14 @@ class SubmitController {
         // Vérifier le format du pseudo
         if (!preg_match('/^[a-zA-Z0-9_]{3,20}$/', $pseudo)) {
             $_SESSION['error'] = "Le pseudo doit contenir entre 3 et 20 caractères (lettres, chiffres et underscore uniquement)";
-            header('Location: /ctf_anna/ctf-challenge/public/submit.php');
+            header('Location: submit.php');
             exit;
         }
 
         // Vérifier le format du flag
         if (!preg_match('/^[a-zA-Z0-9_\-]{3,50}$/', $flag)) {
             $_SESSION['error'] = "Le flag doit contenir entre 3 et 50 caractères (lettres, chiffres, underscore et tiret uniquement)";
-            header('Location: /ctf_anna/ctf-challenge/public/submit.php');
+            header('Location: submit.php');
             exit;
         }
 
@@ -79,14 +52,14 @@ class SubmitController {
         $player = $this->submitModel->getPlayerByPseudo($pseudo);
         if (!$player) {
             $_SESSION['error'] = "Joueur non trouvé";
-            header('Location: /ctf_anna/ctf-challenge/public/submit.php');
+            header('Location: submit.php');
             exit;
         }
 
         // Vérifier si le joueur est en prison
         if ($player['ctf_prison'] == 1) {
             $_SESSION['error'] = "Vous êtes en prison et ne pouvez pas soumettre de flag";
-            header('Location: /ctf_anna/ctf-challenge/public/submit.php');
+            header('Location: submit.php');
             exit;
         }
 
@@ -101,7 +74,7 @@ class SubmitController {
         }
         if (!$challengeExists) {
             $_SESSION['error'] = "Challenge invalide";
-            header('Location: /ctf_anna/ctf-challenge/public/submit.php');
+            header('Location: submit.php');
             exit;
         }
 
@@ -117,7 +90,7 @@ class SubmitController {
         ]);
         if ($stmt->fetchColumn() > 0) {
             $_SESSION['error'] = "Vous avez déjà soumis ce challenge";
-            header('Location: /ctf_anna/ctf-challenge/public/submit.php');
+            header('Location: submit.php');
             exit;
         }
 
@@ -152,7 +125,7 @@ class SubmitController {
             $_SESSION['error'] = "Flag incorrect ! Vous êtes maintenant en prison.";
         }
 
-        header('Location: /ctf_anna/ctf-challenge/public/submit.php');
+        header('Location: submit.php');
         exit;
     }
 } 

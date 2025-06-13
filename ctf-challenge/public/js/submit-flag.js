@@ -1,8 +1,5 @@
 console.log('Script submit-flag.js chargé');
 
-// Variable globale pour stocker l'état du CTF
-let isCTFActive = false;
-
 // Fonction pour afficher la modale
 function showModal(title, message) {
     console.log('Affichage de la modale:', title, message);
@@ -45,30 +42,4 @@ window.onclick = function(event) {
     if (event.target == modal) {
         closeModal();
     }
-}
-
-// Vérifier périodiquement si le CTF est en cours
-function checkCTFStatus() {
-    fetch('/ctf_anna/ctf-challenge/public/api/ctf-time.php')
-        .then(response => response.json())
-        .then(data => {
-            const now = new Date().getTime();
-            const startTime = new Date(data.start_time).getTime();
-            const endTime = new Date(data.end_time).getTime();
-            isCTFActive = now >= startTime && now <= endTime;
-        })
-        .catch(error => console.error('Erreur lors de la vérification du statut du CTF:', error));
-}
-
-// Gestionnaire de soumission du formulaire
-document.getElementById('submitForm').addEventListener('submit', function(event) {
-    if (!isCTFActive) {
-        event.preventDefault();
-        showModal('CTF non actif', '⏰ Le CTF n\'est pas en cours. Vous ne pouvez pas soumettre de flag pour le moment.');
-    }
-});
-
-// Vérifier le statut toutes les 5 secondes
-setInterval(checkCTFStatus, 5000);
-// Vérifier immédiatement au chargement
-checkCTFStatus(); 
+} 
