@@ -1,4 +1,9 @@
 <?php
+require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/app/core/database.php';
+
+// Initialiser la connexion PDO
+$pdo = getPDO();
+
 // Récupérer les messages de session
 $successMessage = isset($_SESSION['success']) ? $_SESSION['success'] : null;
 $errorMessage = isset($_SESSION['error']) ? $_SESSION['error'] : null;
@@ -6,6 +11,30 @@ $errorMessage = isset($_SESSION['error']) ? $_SESSION['error'] : null;
 // Effacer les messages après les avoir récupérés
 unset($_SESSION['success']);
 unset($_SESSION['error']);
+
+// Vérifier si le CTF est en cours
+$stmt = $pdo->prepare("
+    SELECT ctf_start_time, ctf_end_time 
+    FROM ctf_config 
+    WHERE id_ctf_config = 1
+");
+$stmt->execute();
+$config = $stmt->fetch();
+
+$isCTFActive = false;
+if ($config) {
+    $now = new DateTime();
+    $startTime = new DateTime($config['ctf_start_time']);
+    $endTime = new DateTime($config['ctf_end_time']);
+    $isCTFActive = ($now >= $startTime && $now <= $endTime);
+    
+    // Log pour déboguer
+    error_log("CTF Status Check:");
+    error_log("Now: " . $now->format('Y-m-d H:i:s'));
+    error_log("Start: " . $startTime->format('Y-m-d H:i:s'));
+    error_log("End: " . $endTime->format('Y-m-d H:i:s'));
+    error_log("Is Active: " . ($isCTFActive ? 'true' : 'false'));
+}
 ?>
 
 <!-- Modale pour les messages -->
@@ -26,7 +55,7 @@ unset($_SESSION['error']);
 
 <div id="form-submit-flag">
     <h2>Soumettre un flag</h2>
-    <form action="/ctf_anna/ctf-challenge/public/submit.php" method="post">
+    <form action="/ctf_anna/ctf-challenge/public/submit.php" method="post" id="submitForm">
         <label for="pseudo">Votre pseudo :</label>
         <input type="text" id="pseudo" name="pseudo" required>
 
@@ -49,56 +78,16 @@ unset($_SESSION['error']);
     </form>
 </div>
 
-<script>
-    // Fonction pour afficher la modale
-    function showModal(title, message) {
-        const modal = document.getElementById('messageModal');
-        const modalTitle = modal.querySelector('.modal-title');
-        const modalMessage = modal.querySelector('.modal-message');
-        
-        // Adapter le message en fonction du contenu
-        if (message.includes('Flag correct')) {
-            if (message.includes('Les points seront attribués')) {
-                modalTitle.textContent = 'Challenge en cours';
-                modalMessage.innerHTML = '🟣 ' + message;
-            } else {
-                modalTitle.textContent = 'Challenge réussi';
-                modalMessage.innerHTML = '🟢 ' + message;
-            }
-        } else {
-            modalTitle.textContent = 'Challenge échoué';
-            modalMessage.innerHTML = '⛓️ ' + message;
-        }
-        
-        modal.style.display = 'block';
-    }
-
-    // Fonction pour fermer la modale
-    function closeModal() {
-        const modal = document.getElementById('messageModal');
-        modal.style.display = 'none';
-    }
-
-    // Fermer la modale quand on clique sur le X
-    document.querySelector('.close').onclick = closeModal;
-
-    // Fermer la modale quand on clique sur le bouton OK
-    document.querySelector('.modal-button').onclick = closeModal;
-
-    // Fermer la modale quand on clique en dehors
-    window.onclick = function(event) {
-        const modal = document.getElementById('messageModal');
-        if (event.target == modal) {
-            closeModal();
-        }
-    }
-
-    // Afficher la modale si un message existe
-    <?php if ($successMessage): ?>
+<?php if ($successMessage): ?>
+    <script>
         showModal('Succès', '<?php echo addslashes($successMessage); ?>');
-    <?php endif; ?>
+    </script>
+<?php endif; ?>
 
-    <?php if ($errorMessage): ?>
+<?php if ($errorMessage): ?>
+    <script>
         showModal('Erreur', '<?php echo addslashes($errorMessage); ?>');
-    <?php endif; ?>
-</script>
+    </script>
+<?php endif; ?>
+
+<script src="/ctf_anna/ctf-challenge/public/js/submit-flag.js"></script>

@@ -15,8 +15,35 @@ class SubmitController {
         require_once dirname(__DIR__) . '/views/submitting.php';
     }
 
+    private function isCTFActive() {
+        $stmt = $this->pdo->prepare("
+            SELECT ctf_start_time, ctf_end_time 
+            FROM ctf_config 
+            WHERE id_ctf_config = 1
+        ");
+        $stmt->execute();
+        $config = $stmt->fetch();
+
+        if (!$config) {
+            return false;
+        }
+
+        $now = new \DateTime();
+        $startTime = new \DateTime($config['ctf_start_time']);
+        $endTime = new \DateTime($config['ctf_end_time']);
+
+        return $now >= $startTime && $now <= $endTime;
+    }
+
     public function submit() {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: /ctf_anna/ctf-challenge/public/submit.php');
+            exit;
+        }
+
+        // Vérifier si le CTF est en cours
+        if (!$this->isCTFActive()) {
+            $_SESSION['error'] = "Le CTF n'est pas en cours. Vous ne pouvez pas soumettre de flag pour le moment.";
             header('Location: /ctf_anna/ctf-challenge/public/submit.php');
             exit;
         }
