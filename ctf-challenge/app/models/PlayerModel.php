@@ -97,6 +97,13 @@ class PlayerModel {
                 'prison' => isset($data['prison']) ? 1 : 0
             ];
 
+            // Si le joueur est mis en prison, définir le temps de début
+            if (isset($data['prison']) && $data['prison'] == 1) {
+                $sql .= ", ctf_prison_start_time = NOW()";
+            } else {
+                $sql .= ", ctf_prison_start_time = NULL";
+            }
+
             // Ajouter la photo à la requête si une nouvelle photo a été uploadée
             if ($photoName) {
                 $sql .= ", ctf_photo = :photo";

@@ -102,18 +102,43 @@ function updatePrisonTimers() {
     });
 }
 
+// Fonction pour actualiser la carte prison
+function refreshPrisonCard() {
+    fetch('/ctf_anna/ctf-challenge/public/api/get-prison-players.php')
+        .then(response => response.text())
+        .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const newPrisonPlayers = doc.querySelector('#prison-players');
+            const currentPrisonPlayers = document.querySelector('#prison-players');
+            
+            // Mettre à jour le contenu si nécessaire
+            if (newPrisonPlayers.innerHTML !== currentPrisonPlayers.innerHTML) {
+                currentPrisonPlayers.innerHTML = newPrisonPlayers.innerHTML;
+                
+                // Réinitialiser les timers pour les nouveaux joueurs
+                document.querySelectorAll('.prison-player').forEach(player => {
+                    const startTime = player.dataset.startTime;
+                    player.dataset.timeSpent = Math.floor((new Date() - new Date(startTime)) / 1000);
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors de l\'actualisation de la carte prison:', error);
+        });
+}
+
 // Initialize timers for all prisoners
 document.querySelectorAll('.prison-player').forEach(player => {
-    const playerId = player.dataset.playerId;
-    const prisonTime = parseInt(player.dataset.prisonTime);
     const startTime = player.dataset.startTime;
-    
-    // Initialiser le temps passé à partir du temps déjà écoulé
     player.dataset.timeSpent = Math.floor((new Date() - new Date(startTime)) / 1000);
 });
 
 // Mettre à jour les timers toutes les secondes
 setInterval(updatePrisonTimers, 1000);
+
+// Actualiser la carte prison toutes les 5 secondes
+setInterval(refreshPrisonCard, 1000);
 
 // Mettre à jour immédiatement au chargement
 updatePrisonTimers();

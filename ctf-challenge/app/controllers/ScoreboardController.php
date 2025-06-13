@@ -148,7 +148,7 @@ if (!class_exists('App\Controllers\ScoreboardController')) {
                 LEFT JOIN ctf_equipe e ON j.id_ctf_equipe = e.id_ctf_equipe
                 LEFT JOIN ctf_prison p ON p.id_ctf_prison = 1
                 WHERE j.ctf_prison = 1
-                ORDER BY j.ctf_pseudo ASC
+                ORDER BY j.ctf_prison_start_time ASC
                 LIMIT 2
             ");
             $stmt->execute();
@@ -157,10 +157,8 @@ if (!class_exists('App\Controllers\ScoreboardController')) {
             // Log pour le débogage
             foreach ($players as $player) {
                 error_log("Joueur en prison - ID: " . $player['id_ctf_joueur']);
-                error_log("Temps de prison (secondes): " . $player['prison_time_seconds']);
                 error_log("Temps passé (secondes): " . $player['time_spent']);
                 error_log("Date d'entrée en prison: " . $player['prison_start_time']);
-                error_log("Date actuelle: " . date('Y-m-d H:i:s'));
             }
             
             return $players;
