@@ -120,8 +120,66 @@ class SubmitController {
             }
         } else {
             // Mettre le joueur en prison
-            $stmt = $this->pdo->prepare("UPDATE ctf_joueur SET ctf_prison = 1 WHERE id_ctf_joueur = :player_id");
-            $stmt->execute(['player_id' => $player['id_ctf_joueur']]);
+            error_log("=== DÉBUT DU PROCESSUS D'ENVOI EN PRISON ===");
+            error_log("ID du joueur: " . $player['id_ctf_joueur']);
+            
+            try {
+                // Vérifier la configuration de la base de données
+                $stmt = $this->pdo->query("SELECT @@global.time_zone, @@session.time_zone");
+                $timezone = $stmt->fetch();
+                error_log("Configuration timezone - Global: " . $timezone[0] . ", Session: " . $timezone[1]);
+                
+                // Vérifier l'heure actuelle de la base de données
+                $stmt = $this->pdo->query("SELECT NOW()");
+                $dbTime = $stmt->fetchColumn();
+                error_log("Heure actuelle de la base de données: " . $dbTime);
+                
+                // Vérifier l'état actuel du joueur
+                $stmt = $this->pdo->prepare("
+                    SELECT ctf_prison, ctf_prison_start_time 
+                    FROM ctf_joueur 
+                    WHERE id_ctf_joueur = :player_id
+                ");
+                $stmt->execute(['player_id' => $player['id_ctf_joueur']]);
+                $currentState = $stmt->fetch();
+                
+                error_log("État actuel du joueur:");
+                error_log("ctf_prison: " . ($currentState ? $currentState['ctf_prison'] : 'non trouvé'));
+                error_log("ctf_prison_start_time: " . ($currentState ? $currentState['ctf_prison_start_time'] : 'NULL'));
+                
+                // Si le joueur n'est pas en prison OU si le temps de début n'est pas défini
+                if (!$currentState || $currentState['ctf_prison'] == 0 || $currentState['ctf_prison_start_time'] === NULL) {
+                    // Utiliser l'heure de la base de données
+                    $updateStmt = $this->pdo->prepare("
+                        UPDATE ctf_joueur 
+                        SET ctf_prison = 1, 
+                            ctf_prison_start_time = NOW() 
+                        WHERE id_ctf_joueur = :player_id
+                    ");
+                    
+                    $result = $updateStmt->execute(['player_id' => $player['id_ctf_joueur']]);
+                    error_log("Résultat de la mise à jour: " . ($result ? "succès" : "échec"));
+                    
+                    // Vérifier immédiatement après la mise à jour
+                    $checkStmt = $this->pdo->prepare("
+                        SELECT ctf_prison, ctf_prison_start_time 
+                        FROM ctf_joueur 
+                        WHERE id_ctf_joueur = :player_id
+                    ");
+                    $checkStmt->execute(['player_id' => $player['id_ctf_joueur']]);
+                    $checkResult = $checkStmt->fetch();
+                    error_log("État après mise à jour:");
+                    error_log("ctf_prison: " . ($checkResult ? $checkResult['ctf_prison'] : 'non trouvé'));
+                    error_log("ctf_prison_start_time: " . ($checkResult ? $checkResult['ctf_prison_start_time'] : 'NULL'));
+                } else {
+                    error_log("Le joueur est déjà en prison avec un temps de début valide");
+                }
+            } catch (\PDOException $e) {
+                error_log("Erreur PDO lors de la mise à jour: " . $e->getMessage());
+                error_log("Code d'erreur: " . $e->getCode());
+            }
+            
+            error_log("=== FIN DU PROCESSUS D'ENVOI EN PRISON ===");
             $_SESSION['error'] = "Flag incorrect ! Vous êtes maintenant en prison.";
         }
 
