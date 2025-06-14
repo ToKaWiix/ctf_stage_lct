@@ -137,13 +137,8 @@ if (!class_exists('App\Controllers\ScoreboardController')) {
         public function getPrisonPlayers() {
             $stmt = $this->pdo->prepare("
                 SELECT j.*, e.ctf_nom_equipe, 
-                       TIME_TO_SEC(COALESCE(p.ctf_prison_time, '00:12:00')) as prison_time_seconds,
-                       CASE 
-                           WHEN j.ctf_prison_start_time IS NOT NULL 
-                           THEN TIMESTAMPDIFF(SECOND, j.ctf_prison_start_time, NOW())
-                           ELSE 0 
-                       END as time_spent,
-                       j.ctf_prison_start_time as prison_start_time
+                       TIME_TO_SEC(COALESCE(p.ctf_prison_time, '00:12:00')) as prison_time,
+                       j.ctf_prison_start_time
                 FROM ctf_joueur j
                 LEFT JOIN ctf_equipe e ON j.id_ctf_equipe = e.id_ctf_equipe
                 LEFT JOIN ctf_prison p ON p.id_ctf_prison = 1
@@ -157,8 +152,8 @@ if (!class_exists('App\Controllers\ScoreboardController')) {
             // Log pour le débogage
             foreach ($players as $player) {
                 error_log("Joueur en prison - ID: " . $player['id_ctf_joueur']);
-                error_log("Temps passé (secondes): " . $player['time_spent']);
-                error_log("Date d'entrée en prison: " . $player['prison_start_time']);
+                error_log("Temps de prison: " . $player['prison_time']);
+                error_log("Date d'entrée en prison: " . $player['ctf_prison_start_time']);
             }
             
             return $players;

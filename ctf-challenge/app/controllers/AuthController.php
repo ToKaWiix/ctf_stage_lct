@@ -71,7 +71,7 @@ class AuthController {
         session_destroy();
         
         // Rediriger vers la page de connexion
-        header('Location: /ctf_anna/ctf-challenge/public/loginAdmin.php');
+        header('Location: ' . BASE_URL . '/loginAdmin.php');
         exit;
     }
 } 

@@ -50,7 +50,7 @@ class PointsController {
             error_log("Erreur dans PointsController::distributePoints : " . $e->getMessage());
         }
 
-        header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=config');
+        header('Location: ' . BASE_URL . '/dashboard.php?page=config');
         exit;
     }
 } 

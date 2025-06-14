@@ -6,7 +6,7 @@
         <div id="card-add-admin-content">
             <h3>Ajout administrateur</h3>
             <div id="add-admin-form">
-                <form action="/ctf_anna/ctf-challenge/public/dashboard.php?page=config&action=add" method="post">
+                <form action="<?= BASE_URL ?>/dashboard.php?page=config&action=add" method="post">
                     <label for="username">Identifiant :</label>
                     <input type="text" id="username" name="username" required>
                     <label for="password">Mot de passe :</label>
@@ -55,7 +55,7 @@
         <div id="ctf-time-title">
             <h3>Durée du CTF</h3>
         </div>
-        <form action="/ctf_anna/ctf-challenge/public/dashboard.php?page=config&action=update_ctf_time" method="post" id="ctf-time-form">
+        <form action="<?= BASE_URL ?>/dashboard.php?page=config&action=update_ctf_time" method="post" id="ctf-time-form">
             <div class="ctf-time-row">
                 <label for="start-time">Début du CTF :</label>
                 <input type="datetime-local" id="start-time" name="start-time" required
@@ -75,7 +75,7 @@
         <div id="prison-time-title">
             <h3>Temps passé en prison</h3>
         </div>
-        <form action="/ctf_anna/ctf-challenge/public/dashboard.php?page=config&action=update_prison_time" method="post" id="prison-time-form">
+        <form action="<?= BASE_URL ?>/dashboard.php?page=config&action=update_prison_time" method="post" id="prison-time-form">
             <div class="prison-time-row">
                 <label for="prison-time" class="sr-only">Temps passé en prison :</label>
                 <input type="time" id="prison-time" name="prison-time" required
@@ -90,7 +90,7 @@
         <div id="partenaires-title">
             <h3>Partenaires</h3>
         </div>
-        <form action="/ctf_anna/ctf-challenge/public/dashboard.php?page=config&action=update_partner_text" method="post" id="partenaires-form">
+        <form action="<?= BASE_URL ?>/dashboard.php?page=config&action=update_partner_text" method="post" id="partenaires-form">
             <div class="partenaires-row">
                 <label for="partner_text" class="sr-only">Partenaires :</label>
                 <input type="text" id="partner_text" name="partner_text" required value="<?= isset($partnerText) ? htmlspecialchars($partnerText) : '' ?>">
@@ -104,7 +104,7 @@
         <div id="give-pts-title">
             <h3>Attribuer les points</h3>
         </div>
-        <form action="/ctf_anna/ctf-challenge/public/dashboard.php?page=config&action=distribute_points" method="post" id="give-pts-form">
+        <form action="<?= BASE_URL ?>/dashboard.php?page=config&action=distribute_points" method="post" id="give-pts-form">
             <div class="give-pts-btn-row">
                 <button type="submit">Valider</button>
             </div>
@@ -124,8 +124,8 @@
     </div>
 </div>
 
-<form id="delete-admin-form" action="/ctf_anna/ctf-challenge/public/dashboard.php?page=config&action=delete" method="post" style="display:none;">
+<form id="delete-admin-form" action="<?= BASE_URL ?>/dashboard.php?page=config&action=delete" method="post" style="display:none;">
     <input type="hidden" name="admin_id" id="delete-admin-id">
 </form>
 
-<script src="/ctf_anna/ctf-challenge/public/js/config.js"></script>
+<script src="<?= JS_URL ?>/config.js"></script>

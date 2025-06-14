@@ -55,7 +55,7 @@ if ($config) {
 
 <div id="form-submit-flag">
     <h2>Soumettre un flag</h2>
-    <form action="/ctf_anna/ctf-challenge/public/submit.php" method="post" id="submitForm">
+    <form action="<?= BASE_URL ?>/submit.php" method="post" id="submitForm">
         <label for="pseudo">Votre pseudo :</label>
         <input type="text" id="pseudo" name="pseudo" required>
 
@@ -79,7 +79,7 @@ if ($config) {
 </div>
 
 <!-- Charger le script JavaScript avant d'utiliser showModal -->
-<script src="/ctf_anna/ctf-challenge/public/js/submit-flag.js"></script>
+<script src="<?= JS_URL ?>/submit-flag.js"></script>
 
 <?php if ($successMessage): ?>
     <script>

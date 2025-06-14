@@ -44,7 +44,7 @@
         <div id="add-team-title">
             <h3>Ajouter une équipe</h3>
         </div>
-        <form action="/ctf_anna/ctf-challenge/public/dashboard.php?page=teams&action=add" method="post">
+        <form action="<?= BASE_URL ?>/dashboard.php?page=teams&action=add" method="post">
             <label for="username">Nom de l'équipe :</label>
             <input type="text" id="username" name="username" required>
             <div id="submit-login-button">
@@ -70,7 +70,7 @@
 <div id="edit-modal" class="modal">
     <div class="modal-content">
         <h3>Modifier l'équipe</h3>
-        <form id="edit-team-form" action="/ctf_anna/ctf-challenge/public/teams.php?action=edit" method="post">
+        <form id="edit-team-form" action="<?= BASE_URL ?>/dashboard.php?page=teams&action=edit" method="post">
             <input type="hidden" id="edit-team-id" name="team_id">
             <div class="form-group">
                 <label for="edit-team-name">Nom de l'équipe :</label>
@@ -95,4 +95,4 @@
     </div>
 </div>
 
-<script src="/ctf_anna/ctf-challenge/public/js/teams.js"></script>
+<script src="<?= JS_URL ?>/teams.js"></script>

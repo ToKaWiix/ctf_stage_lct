@@ -283,7 +283,7 @@ table tbody tr:last-child td:last-child {
 /* TOTAL DE FLAGS TROUVÉS */
 
 #prison-scoreboard {
-    background-image: url("/ctf_anna/ctf-challenge/public/images/prison.jpg");
+    background-image: var(--bg-image);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

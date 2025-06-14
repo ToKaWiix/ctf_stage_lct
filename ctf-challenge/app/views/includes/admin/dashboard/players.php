@@ -53,7 +53,7 @@ unset($_SESSION['players_data']);
                     <td><?= htmlspecialchars($player['ctf_pseudo'] ?? '') ?></td>
                     <td>
                         <?php if (!empty($player['ctf_photo'])): ?>
-                            <img src="/ctf_anna/ctf-challenge/public/images/<?= htmlspecialchars($player['ctf_photo']) ?>" 
+                            <img src="<?= IMAGES_URL ?>/<?= htmlspecialchars($player['ctf_photo']) ?>" 
                                  alt="<?= htmlspecialchars($player['ctf_prenom'] ?? '') ?>" 
                                  style="width:40px;height:40px;border-radius:50%;">
                         <?php endif; ?>
@@ -98,7 +98,7 @@ unset($_SESSION['players_data']);
         <div id="add-player-title">
             <h3>Ajouter un joueur</h3>
         </div>
-        <form action="/ctf_anna/ctf-challenge/public/players.php?action=add" method="post" enctype="multipart/form-data">
+        <form action="<?= BASE_URL ?>/dashboard.php?page=players&action=add" method="post" enctype="multipart/form-data">
             <label for="firstname">Prénom du joueur :</label>
             <input type="text" id="firstname" name="firstname" required>
             <label for="lastname">Nom du joueur :</label>
@@ -139,7 +139,7 @@ unset($_SESSION['players_data']);
 <div id="edit-modal" class="modal">
     <div class="modal-content">
         <h3>Modifier le joueur</h3>
-        <form id="edit-player-form" action="/ctf_anna/ctf-challenge/public/players.php?action=edit" method="post" enctype="multipart/form-data">
+        <form id="edit-player-form" action="<?= BASE_URL ?>/dashboard.php?page=players&action=edit" method="post" enctype="multipart/form-data">
             <input type="hidden" id="edit-player-id" name="player_id">
             <div class="form-group">
                 <label for="edit-player-firstname">Prénom :</label>
@@ -183,4 +183,4 @@ unset($_SESSION['players_data']);
     </div>
 </div>
 
-<script src="/ctf_anna/ctf-challenge/public/js/players.js"></script>
+<script src="<?= JS_URL ?>/players.js"></script>

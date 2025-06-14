@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Script players.js chargé');
+    
     // Sélection des éléments
     const deleteButtons = document.querySelectorAll('.delete-player');
     const editButtons = document.querySelectorAll('.edit-player');
@@ -11,9 +13,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const editForm = document.getElementById('edit-player-form');
 
     // Gestion des accordéons
-    const accordions = document.getElementsByClassName("accordion");
-    for (let i = 0; i < accordions.length; i++) {
-        accordions[i].addEventListener("click", function() {
+    const accordions = document.querySelectorAll(".accordion");
+    console.log('Accordéons trouvés:', accordions.length);
+    
+    accordions.forEach(accordion => {
+        accordion.addEventListener("click", function() {
+            console.log('Clic sur accordéon');
             this.classList.toggle("active");
             const panel = this.nextElementSibling;
             const icon = this.querySelector('.accordion-icon');
@@ -26,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 icon.textContent = '+';
             }
         });
-    }
+    });
 
     // Ouvrir l'accordéon de l'équipe spécifiée dans l'URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -55,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
             deleteModal.style.display = 'block';
             
             confirmDeleteBtn.onclick = function() {
-                window.location.href = `/ctf_anna/ctf-challenge/public/dashboard.php?page=players&action=delete&id=${playerId}`;
+                window.location.href = `${BASE_URL}/dashboard.php?page=players&action=delete&id=${playerId}`;
             };
         });
     });

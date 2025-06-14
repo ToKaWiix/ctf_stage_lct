@@ -2,4 +2,4 @@
     <h3><?php echo htmlspecialchars($GLOBALS['partenaires'][0]['ctf_libelle_partenaire']); ?></h3>
 </div>
 
-<script src="/ctf_anna/ctf-challenge/public/js/scoreboard.js"></script>
+<script src="<?= JS_URL ?>/scoreboard.js"></script>

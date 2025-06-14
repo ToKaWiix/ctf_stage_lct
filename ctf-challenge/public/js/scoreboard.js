@@ -98,15 +98,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Fonction pour mettre à jour le timer
     function updateTimer() {
-        fetch('/ctf_anna/ctf-challenge/public/api/ctf-time.php')
+        fetch(`${BASE_URL}/api/ctf-time.php`)
             .then(response => response.json())
             .then(data => {
-                const now = new Date().getTime();
-                const startTime = new Date(data.start_time).getTime();
-                const endTime = new Date(data.end_time).getTime();
+                const now = new Date(); // Obtenir l'heure actuelle en objet Date
+                const startTime = new Date(data.start_time); // Convertir start_time en objet Date
+                const endTime = new Date(data.end_time); // Convertir end_time en objet Date
+
+                // Logs pour le débogage des heures
+                console.log('Current Time (now):', now.toISOString());
+                console.log('CTF Start Time (data.start_time):', data.start_time, '->', startTime.toISOString());
+                console.log('CTF End Time (data.end_time):', data.end_time, '->', endTime.toISOString());
 
                 // Si le CTF n'a pas encore commencé
-                if (now < startTime) {
+                if (now.getTime() < startTime.getTime()) {
                     timerElement.textContent = "En attente";
                     endSoundPlayed = false;
                     stopCountdownSound();
@@ -114,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
 
                 // Si le CTF est terminé
-                if (now >= endTime) {
+                if (now.getTime() >= endTime.getTime()) {
                     timerElement.textContent = "Terminé !";
                     playEndSound();
                     clearInterval(countdownInterval);
@@ -122,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
 
                 // Calculer le temps restant
-                const timeRemaining = endTime - now;
+                const timeRemaining = endTime.getTime() - now.getTime();
                 const secondsRemaining = Math.floor(timeRemaining / 1000);
 
                 // Jouer le son de décompte pour les 5 dernières secondes
@@ -199,15 +204,30 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialiser la rotation des challenges
     updateChallengeHeaders();
 
-    // Rafraîchir la page toutes les 5 secondes sans réinitialiser l'animation
+    // Rafraîchir la page toutes les 5 secondes
     setInterval(function() {
-        // Sauvegarder l'état actuel
-        const currentState = {
-            position: parseFloat(localStorage.getItem('partenairePosition')),
-            challenges: window.challenges
-        };
-        
-        // Rafraîchir la page
-        window.location.reload();
+        refreshPrisonCard();
+        updateChallengeHeaders();
     }, 5000);
+
+    // Fonction pour actualiser la carte prison
+    function refreshPrisonCard() {
+        const prisonContainer = document.getElementById('prison-players');
+        if (!prisonContainer) return;
+
+        fetch(`${BASE_URL}/api/get-prison-players.php`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(html => {
+                prisonContainer.innerHTML = html;
+                // Les timers individuels seront mis à jour par la logique HTML générée si nécessaire
+            })
+            .catch(error => {
+                console.error('Erreur lors de l\'actualisation de la carte prison:', error);
+            });
+    }
 }); 

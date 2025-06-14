@@ -32,39 +32,39 @@ class ChallengeController {
         } catch (\Exception $e) {
             error_log("Erreur dans ChallengeController::index : " . $e->getMessage());
             error_log("Trace : " . $e->getTraceAsString());
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=challenges&error=' . urlencode("Une erreur est survenue lors du chargement des challenges"));
+            header('Location: ' . BASE_URL . '/dashboard.php?page=challenges&error=' . urlencode("Une erreur est survenue lors du chargement des challenges"));
             exit;
         }
     }
 
     public function addChallenge() {
         if (!isset($_POST['challenge_name']) || !isset($_POST['points']) || !isset($_POST['flag'])) {
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=challenges&error=Données manquantes');
+            header('Location: ' . BASE_URL . '/dashboard.php?page=challenges&error=Données manquantes');
             exit;
         }
 
         try {
             $challengeModel = new ChallengeModel($this->pdo);
             $challengeModel->add($_POST);
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=challenges&success=1');
+            header('Location: ' . BASE_URL . '/dashboard.php?page=challenges&success=1');
         } catch (\Exception $e) {
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=challenges&error=' . urlencode($e->getMessage()));
+            header('Location: ' . BASE_URL . '/dashboard.php?page=challenges&error=' . urlencode($e->getMessage()));
         }
         exit;
     }
 
     public function deleteChallenge() {
         if (!isset($_GET['id'])) {
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=challenges&error=ID du challenge manquant');
+            header('Location: ' . BASE_URL . '/dashboard.php?page=challenges&error=ID du challenge manquant');
             exit;
         }
 
         try {
             $challengeModel = new ChallengeModel($this->pdo);
             $challengeModel->delete($_GET['id']);
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=challenges&success=2');
+            header('Location: ' . BASE_URL . '/dashboard.php?page=challenges&success=2');
         } catch (\Exception $e) {
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=challenges&error=' . urlencode($e->getMessage()));
+            header('Location: ' . BASE_URL . '/dashboard.php?page=challenges&error=' . urlencode($e->getMessage()));
         }
         exit;
     }

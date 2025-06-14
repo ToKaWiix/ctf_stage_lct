@@ -39,7 +39,7 @@ class AdminController {
                     $view = dirname(__DIR__) . '/views/includes/admin/dashboard/homeAdmin.php';
                     break;
             case 'teams':
-                // Vérifier si c'est une action de suppression ou d'ajout
+                // Vérifier si c'est une action de suppression, d'ajout ou de modification
                 if (isset($_GET['action'])) {
                     $controller = new TeamController($this->pdo);
                     if ($_GET['action'] === 'delete' && isset($_GET['id'])) {
@@ -47,6 +47,9 @@ class AdminController {
                         return;
                     } elseif ($_GET['action'] === 'add' && $_SERVER['REQUEST_METHOD'] === 'POST') {
                         $controller->addTeam();
+                        return;
+                    } elseif ($_GET['action'] === 'edit' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+                        $controller->editTeam();
                         return;
                     }
                 }

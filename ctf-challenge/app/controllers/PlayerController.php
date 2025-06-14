@@ -42,30 +42,30 @@ class PlayerController {
         } catch (\Exception $e) {
             error_log("Erreur dans PlayerController::index : " . $e->getMessage());
             error_log("Trace : " . $e->getTraceAsString());
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=players&error=' . urlencode("Une erreur est survenue lors du chargement des joueurs"));
+            header('Location: ' . BASE_URL . '/dashboard.php?page=players&error=' . urlencode("Une erreur est survenue lors du chargement des joueurs"));
             exit;
         }
     }
 
     public function addPlayer() {
         if (!isset($_POST['firstname']) || !isset($_POST['lastname']) || !isset($_POST['nickname']) || !isset($_POST['team'])) {
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=players&error=Données manquantes');
+            header('Location: ' . BASE_URL . '/dashboard.php?page=players&error=Données manquantes');
             exit;
         }
 
         try {
             $playerModel = new PlayerModel($this->pdo);
             $playerModel->add($_POST);
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=players&success=1');
+            header('Location: ' . BASE_URL . '/dashboard.php?page=players&success=1');
         } catch (\Exception $e) {
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=players&error=' . urlencode($e->getMessage()));
+            header('Location: ' . BASE_URL . '/dashboard.php?page=players&error=' . urlencode($e->getMessage()));
         }
         exit;
     }
 
     public function editPlayer() {
         if (!isset($_POST['player_id']) || !isset($_POST['firstname']) || !isset($_POST['lastname']) || !isset($_POST['nickname']) || !isset($_POST['team'])) {
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=players&error=Données manquantes');
+            header('Location: ' . BASE_URL . '/dashboard.php?page=players&error=Données manquantes');
             exit;
         }
 
@@ -86,16 +86,16 @@ class PlayerController {
             
             // Rediriger avec l'ID de l'équipe
             $teamId = $_POST['team'];
-            header("Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=players&success=3&open_team={$teamId}");
+            header("Location: " . BASE_URL . "/dashboard.php?page=players&success=3&open_team={$teamId}");
         } catch (\Exception $e) {
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=players&error=' . urlencode($e->getMessage()));
+            header('Location: ' . BASE_URL . '/dashboard.php?page=players&error=' . urlencode($e->getMessage()));
         }
         exit;
     }
 
     public function deletePlayer() {
         if (!isset($_GET['id'])) {
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=players&error=ID du joueur manquant');
+            header('Location: ' . BASE_URL . '/dashboard.php?page=players&error=ID du joueur manquant');
             exit;
         }
 
@@ -114,9 +114,9 @@ class PlayerController {
                 'players' => $players
             ];
             
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=players&success=2');
+            header('Location: ' . BASE_URL . '/dashboard.php?page=players&success=2');
         } catch (\Exception $e) {
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=players&error=' . urlencode($e->getMessage()));
+            header('Location: ' . BASE_URL . '/dashboard.php?page=players&error=' . urlencode($e->getMessage()));
         }
         exit;
     }

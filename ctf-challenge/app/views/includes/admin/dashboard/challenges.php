@@ -62,7 +62,7 @@ error_log("Session après nettoyage : " . print_r($_SESSION, true));
         <div id="add-challenge-title">
             <h3>Ajouter un challenge</h3>
         </div>
-        <form action="/ctf_anna/ctf-challenge/public/dashboard.php?page=challenges&action=add" method="post">
+        <form action="<?= BASE_URL ?>/dashboard.php?page=challenges&action=add" method="post">
             <label for="challenge_name">Nom du défi :</label>
             <input type="text" id="challenge_name" name="challenge_name" required>
             <label for="flag">Flag :</label>
@@ -101,4 +101,4 @@ error_log("Session après nettoyage : " . print_r($_SESSION, true));
     </div>
 </div>
 
-<script src="/ctf_anna/ctf-challenge/public/js/challenges.js"></script>
+<script src="<?= JS_URL ?>/challenges.js"></script>

@@ -1,4 +1,7 @@
 <?php
+error_log("Dashboard Loaded: " . $_SERVER['REQUEST_URI']);
+error_log("Script Name: " . $_SERVER['SCRIPT_NAME']);
+require_once dirname(__DIR__) . '/app/core/config.php';
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 require_once dirname(__DIR__) . '/app/core/database.php';
 require_once dirname(__DIR__) . '/app/core/auth.php';

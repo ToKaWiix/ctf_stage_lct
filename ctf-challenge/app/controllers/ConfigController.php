@@ -58,7 +58,7 @@ class ConfigController {
         $password = $_POST['password'] ?? '';
 
         if (empty($username) || empty($password)) {
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=config&error=Champs manquants');
+            header('Location: ' . BASE_URL . '/dashboard.php?page=config&error=Champs manquants');
             exit;
         }
 
@@ -68,19 +68,19 @@ class ConfigController {
         // Ajout dans la BDD
         $this->configModel->addAdmin($username, $hashedPassword);
 
-        header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=config&success=1');
+        header('Location: ' . BASE_URL . '/dashboard.php?page=config&success=1');
         exit;
     }
 
     public function deleteAdmin() {
         $adminId = $_POST['admin_id'] ?? null;
         if (!$adminId) {
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=config&error=ID manquant');
+            header('Location: ' . BASE_URL . '/dashboard.php?page=config&error=ID manquant');
             exit;
         }
 
         $this->configModel->deleteAdmin($adminId);
-        header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=config&success=2');
+        header('Location: ' . BASE_URL . '/dashboard.php?page=config&success=2');
         exit;
     }
 
@@ -89,12 +89,12 @@ class ConfigController {
         $end = $_POST['end-time'] ?? null;
 
         if (!$start || !$end) {
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=config&error=Champs manquants');
+            header('Location: ' . BASE_URL . '/dashboard.php?page=config&error=Champs manquants');
             exit;
         }
 
         $this->configModel->updateCtfTime($start, $end);
-        header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=config&success=3');
+        header('Location: ' . BASE_URL . '/dashboard.php?page=config&success=3');
         exit;
     }
 
@@ -102,12 +102,12 @@ class ConfigController {
         $prisonTime = $_POST['prison-time'] ?? null;
 
         if (!$prisonTime) {
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=config&error=Champ manquant');
+            header('Location: ' . BASE_URL . '/dashboard.php?page=config&error=Champ manquant');
             exit;
         }
 
         $this->configModel->updatePrisonTime($prisonTime);
-        header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=config&success=4');
+        header('Location: ' . BASE_URL . '/dashboard.php?page=config&success=4');
         exit;
     }
 
@@ -115,12 +115,12 @@ class ConfigController {
         $libelle = $_POST['partner_text'] ?? null;
 
         if ($libelle === null) {
-            header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=config&error=Champ partenaire manquant');
+            header('Location: ' . BASE_URL . '/dashboard.php?page=config&error=Champ partenaire manquant');
             exit;
         }
 
         $this->configModel->updatePartnerText($libelle);
-        header('Location: /ctf_anna/ctf-challenge/public/dashboard.php?page=config&success=5');
+        header('Location: ' . BASE_URL . '/dashboard.php?page=config&success=5');
         exit;
     }
 } 

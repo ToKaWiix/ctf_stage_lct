@@ -21,7 +21,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // Si l'utilisateur est déjà connecté, rediriger vers le dashboard
 if (isLoggedIn()) {
     error_log("loginAdmin.php - Utilisateur déjà connecté, redirection vers dashboard");
-    header('Location: /ctf_anna/ctf-challenge/public/dashboard.php');
+    header('Location: ' . BASE_URL . '/dashboard.php');
     exit;
 }
 
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($authController->login($username, $password)) {
                 error_log("loginAdmin.php - Connexion réussie, redirection vers dashboard");
                 // Redirection vers le dashboard en cas de succès
-                header('Location: /ctf_anna/ctf-challenge/public/dashboard.php');
+                header('Location: ' . BASE_URL . '/dashboard.php');
                 exit;
             } else {
                 error_log("loginAdmin.php - Échec de la connexion");
@@ -71,7 +71,7 @@ include dirname(__DIR__) . '/app/views/includes/admin/login/headerAdmin.php';
 </main>
 
 <!-- Inclure le script de protection -->
-<script src="/ctf_anna/ctf-challenge/public/js/login-protection.js"></script>
+<script src="<?= JS_URL ?>/login-protection.js"></script>
 
 </body>
 </html> 

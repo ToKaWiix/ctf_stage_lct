@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const confirmButton = document.querySelector('#deleteModal .btn-danger');
             if (confirmButton) {
                 confirmButton.onclick = function() {
-                    window.location.href = `/ctf_anna/ctf-challenge/public/dashboard.php?page=challenges&action=delete&id=${challengeId}`;
+                    window.location.href = `${BASE_URL}/dashboard.php?page=challenges&action=delete&id=${challengeId}`;
                 };
             }
         });
